@@ -304,7 +304,7 @@
 		document.body.removeChild(download_link);
 
 	  $('#patient-name').val("");
-	  $('#patient-comments').val("")
+	  $('#patient-comments').val("");
 	  $('#lean_overlay').click();
 	  $('#patient-name').css("background-color", "transparent");
 
