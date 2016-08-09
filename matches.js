@@ -197,3 +197,5 @@ $('#sort').on("click", function () {
 $("#export-csv").click(function(){
   $("table").tableToCSV();
 });
+
+$("#modal").leanModal();

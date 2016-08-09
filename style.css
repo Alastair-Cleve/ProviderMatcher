@@ -32,6 +32,28 @@ button {
   color: white;
 }
 
+.button {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: 0;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 10.5px 24px 11.5px 24px;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 3px;
+  min-height: 24px;
+  background: #233237;
+  color: white;
+}
+
+
 input[type="text"] {
   display: inline-block;
   height: 20px;
@@ -75,4 +97,28 @@ tbody tr:hover {
 
 td {
   text-align: center;
+}
+
+#lean_overlay {
+  position: fixed;
+  z-index:100;
+  top: 0px;
+  left: 0px;
+  height:100%;
+  width:100%;
+  background: #000;
+  display: none;
+}
+
+#trigger_id {
+  width: 600px;
+  padding: 30px;
+  display: none;
+  background: #FFF;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
 }
