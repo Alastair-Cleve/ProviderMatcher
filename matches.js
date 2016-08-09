@@ -1,3 +1,5 @@
+jQuery.fn.tableToCSV = require('./jquery.tableToCSV.js');
+
 var providers = require("./database.js");
 var matchRange = 1;
 var providerKeys = Object.keys(providers);
@@ -190,4 +192,8 @@ $('#sort').on("click", function () {
   $('#root').append(content);
   $('table').floatThead();
 
+});
+
+$("#export-csv").click(function(){
+  $("table").tableToCSV();
 });
