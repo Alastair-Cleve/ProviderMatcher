@@ -158,7 +158,7 @@ $('#sort').on("click", function () {
   .concat(fours).concat(threes).concat(twos).concat(ones).concat(zeroes);
 
   $('#root').html("<br><br>");
-  var content = "<table><tr><th>Id</th>" +
+  var content = "<table><thead><tr><th>Id</th>" +
     "<th>Match Score</th>" +
     "<th>Solution-Orientation</th>" +
     "<th>Structured</th>" +
@@ -169,7 +169,7 @@ $('#sort').on("click", function () {
     "<th>Birth Year</th>" +
     "<th>Ethnicity</th>" +
     "<th>Sexual Orientation</th>" +
-    "<th>Locations</th></tr>";
+    "<th>Locations</th></tr></thead><tbody>";
 
   sorted.forEach(function(key) {
     content += "<tr><td>" + key + "</td>" +
@@ -186,7 +186,8 @@ $('#sort').on("click", function () {
       "<td>" + providers[key]["locations"].join(", ") + "</td>" +
       "</tr>";
   });
-  content += "</table>";
+  content += "</tbody></table>";
   $('#root').append(content);
+  $('table').floatThead();
 
 });

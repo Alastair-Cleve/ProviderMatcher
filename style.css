@@ -50,6 +50,7 @@ select {
 
 table {
   font-size: 18px;
+  border-collapse: collapse;
 }
 
 th {
@@ -64,11 +65,11 @@ tr {
   height: 36px;
 }
 
-tr:nth-child(even) {
+tbody tr:nth-child(even) {
   background-color: #D3D3D3;
 }
 
-tr:hover {
+tbody tr:hover {
   background-color: lightblue;
 }
 
