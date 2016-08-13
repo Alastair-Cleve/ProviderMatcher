@@ -247,7 +247,7 @@
 	      "<td>" + providers[key]["birth_year"] + "</td>" +
 	      "<td>" + providers[key]["ethnicity"] + "</td>" +
 	      "<td>" + providers[key]["sexual_orientation"] + "</td>" +
-	      "<td>" + providers[key]["locations"].join(", ") + "</td>" +
+	      "<td style='text-align:left'>" + providers[key]["locations"].join(", ") + "</td>" +
 	      "</tr>";
 	  });
 	  content += "</tbody></table>";
