@@ -194,7 +194,34 @@ $('#sort').on("click", function () {
 
 });
 
-$("#export-csv").click(function(){
+$("#populate").click(function() {
+  var spreadsheet_hash = {};
+  var spreadsheet_values = $("#spreadsheet-copy-info").val();
+  spreadsheet_values = spreadsheet_values.split("\n");
+  console.log(spreadsheet_values);
+  spreadsheet_values.forEach(function(pair) {
+    pair = pair.split(":");
+    spreadsheet_hash[pair[0].trim()] = pair[1].trim();
+  });
+
+  $('#self-disclosure').val(spreadsheet_hash["Self-Disclosure"]);
+  $('#solution-orientation').val(spreadsheet_hash["Solution-Orientation"]);
+  $('#structured').val(spreadsheet_hash["Structured"]);
+  $('#active').val(spreadsheet_hash["Active"]);
+  $('#mentor_score').val(spreadsheet_hash["Mentor Score"]);
+  $('#age').val(spreadsheet_hash["Age"]);
+  $('#gender').val(spreadsheet_hash["Gender"]);
+  $('#gender_matters').val(spreadsheet_hash["Gender matters?"]);
+  $('#ethnicity').val(spreadsheet_hash["Ethnicity"]);
+  $('#ethnicity_matters').val(spreadsheet_hash["Ethnicity matters?"]);
+  $('#lgbt').val(spreadsheet_hash["LGBT?"]);
+  $('#location').val(spreadsheet_hash["Location"]);
+  $('#practical').val(spreadsheet_hash["Practical"]);
+
+  $('#sort').click();
+});
+
+$("#export-csv").click(function() {
   $("table").tableToCSV();
 });
 

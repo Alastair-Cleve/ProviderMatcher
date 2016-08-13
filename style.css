@@ -3,6 +3,23 @@ body * {
   font-size: 16px;
 }
 
+.flex-container {
+  display: flex;
+}
+
+#spreadsheet-input {
+  margin-left: 50px;
+  padding-left: 50px;
+  border-left: 1px groove silver;
+}
+
+#spreadsheet-copy-info {
+  border-radius: 4px;
+  border: 1px solid silver;
+  font-size: 16px;
+  background: white;
+}
+
 h1 {
   font-size: 24px;
 }
