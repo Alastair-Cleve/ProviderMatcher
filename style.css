@@ -77,6 +77,13 @@ button {
   color: white;
 }
 
+#modal, #export-csv {
+  background: steelblue;
+}
+
+#modal {
+  margin-left: 95px;
+}
 
 input[type="text"] {
   display: inline-block;
