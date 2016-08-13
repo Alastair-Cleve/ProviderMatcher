@@ -52,6 +52,17 @@
 	var todays_date = new Date();
 	var todays_year = todays_date.getFullYear();
 
+	// For determining locations of providers.
+	// var console_locations = [];
+	// providerKeys.forEach(function(key) {
+	//   providers[key]["locations"].forEach(function(location) {
+	//     if (!console_locations.includes(location)) {
+	//       console_locations.push(location);
+	//     }
+	//   });
+	// });
+	// console.log(console_locations);
+
 	$('#sort').on("click", function () {
 	  var matchScore = {};
 
@@ -148,10 +159,15 @@
 	      matchScore[key]++;
 	    }
 
-	    if (patientLocation === "All") {
+	    if (patientLocation.includes("All")) {
 	      matchScore[key]++;
-	    } else if (providers[key]["locations"].includes(patientLocation)) {
-	      matchScore[key]++;
+	    } else {
+	      for (var i = 0; i < patientLocation.length; i++) {
+	        if (providers[key]["locations"].includes(patientLocation[i])) {
+	          matchScore[key]++;
+	          break;
+	        }
+	      }
 	    }
 
 	  });
@@ -244,25 +260,28 @@
 	  var spreadsheet_hash = {};
 	  var spreadsheet_values = $("#spreadsheet-copy-info").val();
 	  spreadsheet_values = spreadsheet_values.split("\n");
-	  console.log(spreadsheet_values);
 	  spreadsheet_values.forEach(function(pair) {
 	    pair = pair.split(":");
-	    spreadsheet_hash[pair[0].trim()] = pair[1].trim();
+	    spreadsheet_hash[pair[0].trim().toLowerCase()] = pair[1].trim();
 	  });
+	  spreadsheet_hash["location"] = spreadsheet_hash["location"].split(",");
+	  for (var i = 0; i < spreadsheet_hash["location"].length; i++) {
+	    spreadsheet_hash["location"][i] = spreadsheet_hash["location"][i].trim();
+	  }
 
-	  $('#self-disclosure').val(spreadsheet_hash["Self-Disclosure"]);
-	  $('#solution-orientation').val(spreadsheet_hash["Solution-Orientation"]);
-	  $('#structured').val(spreadsheet_hash["Structured"]);
-	  $('#active').val(spreadsheet_hash["Active"]);
-	  $('#mentor_score').val(spreadsheet_hash["Mentor Score"]);
-	  $('#age').val(spreadsheet_hash["Age"]);
-	  $('#gender').val(spreadsheet_hash["Gender"]);
-	  $('#gender_matters').val(spreadsheet_hash["Gender matters?"]);
-	  $('#ethnicity').val(spreadsheet_hash["Ethnicity"]);
-	  $('#ethnicity_matters').val(spreadsheet_hash["Ethnicity matters?"]);
-	  $('#lgbt').val(spreadsheet_hash["LGBT?"]);
-	  $('#location').val(spreadsheet_hash["Location"]);
-	  $('#practical').val(spreadsheet_hash["Practical"]);
+	  $('#self-disclosure').val(spreadsheet_hash["self-disclosure"]);
+	  $('#solution-orientation').val(spreadsheet_hash["solution-orientation"]);
+	  $('#structured').val(spreadsheet_hash["structured"]);
+	  $('#active').val(spreadsheet_hash["active"]);
+	  $('#mentor_score').val(spreadsheet_hash["mentor score"]);
+	  $('#age').val(spreadsheet_hash["age"]);
+	  $('#gender').val(spreadsheet_hash["gender"]);
+	  $('#gender_matters').val(spreadsheet_hash["gender matters?"]);
+	  $('#ethnicity').val(spreadsheet_hash["ethnicity"]);
+	  $('#ethnicity_matters').val(spreadsheet_hash["ethnicity matters?"]);
+	  $('#lgbt').val(spreadsheet_hash["lgbt?"]);
+	  $('#location').val(spreadsheet_hash["location"]);
+	  $('#practical').val(spreadsheet_hash["practical"]);
 
 	  $('#sort').click();
 	});

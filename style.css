@@ -26,7 +26,13 @@ h1 {
 
 .label {
   display: inline-block;
-  width: 200px;
+  width: 205px;
+  vertical-align: top;
+}
+
+#location {
+  border-radius: 4px;
+  border: 1px solid silver;
 }
 
 button {

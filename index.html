@@ -136,38 +136,53 @@
           <option selected value="N/A">N/A</option>
         </select><br>
 
-        <div class="label">Location:</div>
-        <select id="location">
+        <div class="label">Location (Cmd for multiple):</div>
+        <select multiple style="height:100px" id="location">
           <option value="All">All</option>
-          <option value="Financial District">Financial District</option>
-          <option value="Chinatown/North Beach">Chinatown/North Beach</option>
-          <option value="Union Square/Mid-Market">Union Square/Mid-Market</option>
-          <option value="SoMa">SoMa</option>
-          <option value="Marina/Cow Hollow">Marina/Cow Hollow</option>
-          <option value="Russian Hill/Nob Hill">Russian Hill/Nob Hill</option>
-          <option value="Pacific Heights">Pacific Heights</option>
-          <option value="Hayes Valley/Lower Haight/Duboce Triangle">Hayes Valley/Lower Haight/Duboce Triangle</option>
-          <option value="NOPA">NOPA</option>
-          <option value="Mission/Dolores/Bernal Heights">Mission/Dolores/Bernal Heights</option>
           <option value="Castro/Twin Peaks">Castro/Twin Peaks</option>
-          <option value="Noe Valley">Noe Valley</option>
+          <option value="Chinatown/North Beach">Chinatown/North Beach</option>
           <option value="Dogpatch/Potrero Hill">Dogpatch/Potrero Hill</option>
-          <option value="Richmond">Richmond</option>
-          <option value="Sunset">Sunset</option>
           <option value="East Bay/Berkeley">East Bay/Berkeley</option>
-          <option value="South Bay">South Bay</option>
+          <option value="Financial District">Financial District</option>
+          <option value="Hayes Valley/Lower Haight/Duboce Triangle">Hayes Valley/Lower Haight/Duboce Triangle</option>
+          <option value="Laurel Heights">Laurel Heights</option>
+          <option value="Lower Pacific Heights">Lower Pacific Heights</option>
           <option value="Marin/North Bay">Marin/North Bay</option>
+          <option value="Marina/Cow Hollow">Marina/Cow Hollow</option>
+          <option value="Martinez">Martinez</option>
+          <option value="Mission/Dolores/Bernal Heights">Mission/Dolores/Bernal Heights</option>
+          <option value="Noe Valley">Noe Valley</option>
+          <option value="NoPa">NoPa</option>
           <option value="Other">Other</option>
+          <option value="Pacific Heights">Pacific Heights</option>
+          <option value="Peninsula">Peninsula</option>
+          <option value="Richmond">Richmond</option>
+          <option value="Russian Hill/Nob Hill">Russian Hill/Nob Hill</option>
+          <option value="SoMa">SoMa</option>
+          <option value="South Bay">South Bay</option>
+          <option value="Sunset">Sunset</option>
+          <option value="Union Square/Mid-Market">Union Square/Mid-Market</option>
         </select><br><br>
 
         <button type="button" id="sort">Find Providers</button>
-
-        <!-- <a class="button" id="modal" href="#trigger_id">Export as CSV</a> -->
       </div>
 
       <div class="flex-item" id="spreadsheet-input">
         <h3>Or paste a spreadsheet below.</h3>
-        <textarea id="spreadsheet-copy-info" rows="14" cols="50" style="resize: none"></textarea><br><br>
+        <textarea id="spreadsheet-copy-info" rows="19" cols="50" style="resize: none" placeholder="Paste the spreadsheet values in like so (note that colons are required):
+Solution-Orientation: 5
+Structured: 6
+Active: 6
+Practical: 5
+Self-Disclosure: 4
+Age: 25
+Mentor Score: 6
+Gender: Female
+Gender matters?: No
+Ethnicity: Middle Eastern
+Ethnicity matters?: Yes
+LGBT?: No
+Location: Financial District, SoMa"></textarea><br><br>
         <button type="button" id="populate">Find Providers</button>
         <a class="button" id="modal" href="#trigger_id">Export as CSV</a>
       </div>
