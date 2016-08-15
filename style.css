@@ -30,10 +30,18 @@ h1 {
   vertical-align: top;
 }
 
-#location {
-  margin-bottom: 8px;
+#therapies, #location, #days, #times {
+  /*margin-bottom: 8px;*/
   border-radius: 4px;
   border: 1px solid silver;
+}
+
+#therapies, #location {
+  width: 320px;
+}
+
+#days, #times {
+  width: 200px;
 }
 
 button {

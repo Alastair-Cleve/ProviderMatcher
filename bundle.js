@@ -63,6 +63,17 @@
 	// });
 	// console.log(console_locations);
 
+	// For determining therapies of providers.
+	// var console_therapies = [];
+	// providerKeys.forEach(function(key) {
+	//   providers[key]["therapies"].forEach(function(therapy) {
+	//     if (!console_therapies.includes(therapy)) {
+	//       console_therapies.push(therapy);
+	//     }
+	//   });
+	// });
+	// console.log(console_therapies);
+
 	$('#sort').on("click", function () {
 	  var matchScore = {};
 
@@ -72,12 +83,14 @@
 	  var patientActive = parseInt($('#active').val());
 	  var patientMentorScore = parseInt($('#mentor_score').val());
 	  var patientAge = parseInt($('#age').val().trim());
-	  var patientGender = $('#gender').val();
-	  var genderMatters = $('#gender_matters').val();
+	  var genderPreference = $('#gender_preference').val();
 	  var patientEthnicity = $('#ethnicity').val();
 	  var ethnicityMatters = $('#ethnicity_matters').val();
 	  var patientLGBT = $('#lgbt').val();
-	  var patientLocation = $('#location').val()
+	  var patientLocation = $('#location').val();
+	  var therapiesPreference = $('#therapies').val();
+	  var daysPreference = $('#days').val();
+	  var timesPreference = $('#times').val();
 
 	  // Testing for age input.
 	  var reg = new RegExp('^[0-9]+$');
@@ -119,6 +132,17 @@
 	        matchScore[key]++;
 	      }
 
+	    if (therapiesPreference.includes("All")) {
+	      matchScore[key]++;
+	    } else {
+	      for (var i = 0; i < therapiesPreference.length; i++) {
+	        if (providers[key]["therapies"].includes(therapiesPreference[i])) {
+	          matchScore[key]++;
+	          break;
+	        }
+	      }
+	    }
+
 	    if ([1, 2, 3].includes(patientMentorScore)) {
 	      if (((todays_year - providers[key]["birth_year"]) - patientAge) >= 10) {
 	        matchScore[key]++;
@@ -135,8 +159,8 @@
 	      }
 	    }
 
-	    if (genderMatters === "Yes") {
-	      if (providers[key]["gender"] === patientGender) {
+	    if (genderPreference === "Male" || genderPreference === "Female") {
+	      if (providers[key]["gender"] === genderPreference) {
 	        matchScore[key]++;
 	      }
 	    } else {
@@ -164,6 +188,28 @@
 	    } else {
 	      for (var i = 0; i < patientLocation.length; i++) {
 	        if (providers[key]["locations"].includes(patientLocation[i])) {
+	          matchScore[key]++;
+	          break;
+	        }
+	      }
+	    }
+
+	    if (daysPreference.includes("All")) {
+	      matchScore[key]++;
+	    } else {
+	      for (var i = 0; i < daysPreference.length; i++) {
+	        if (providers[key]["days"].includes(daysPreference[i])) {
+	          matchScore[key]++;
+	          break;
+	        }
+	      }
+	    }
+
+	    if (timesPreference.includes("All")) {
+	      matchScore[key]++;
+	    } else {
+	      for (var i = 0; i < timesPreference.length; i++) {
+	        if (providers[key]["times"].includes(timesPreference[i])) {
 	          matchScore[key]++;
 	          break;
 	        }
@@ -222,32 +268,37 @@
 	  .concat(fours).concat(threes).concat(twos).concat(ones).concat(zeroes);
 
 	  $('#root').html("<br><br>");
-	  var content = "<table><thead><tr><th>Id</th>" +
+	  var content = "<table><thead><tr><th>Name</th>" +
 	    "<th>Match Score</th>" +
-	    "<th>Solution-Orientation</th>" +
-	    "<th>Structured</th>" +
-	    "<th>Active</th>" +
-	    "<th>Practical</th>" +
-	    "<th>Self-Disclosure</th>" +
+	    "<th>SO</th>" +
+	    "<th>Str</th>" +
+	    "<th>Act</th>" +
+	    "<th>Prac</th>" +
+	    "<th>SD</th>" +
+	    "<th>Therapies</th>" +
 	    "<th>Gender</th>" +
 	    "<th>Birth Year</th>" +
 	    "<th>Ethnicity</th>" +
 	    "<th>Sexual Orientation</th>" +
-	    "<th>Locations</th></tr></thead><tbody>";
+	    "<th>Locations</th>" +
+	    "<th>Availability</th></tr></thead><tbody>";
 
 	  sorted.forEach(function(key) {
-	    content += "<tr><td>" + key + "</td>" +
-	      "<td width=7%>" + matchScore[key] + " / 9" + "</td>" +
-	      "<td width=7%>" + providers[key]["solution-orientation"] + "</td>" +
-	      "<td width=7%>" + providers[key]["structured"] + "</td>" +
-	      "<td width=7%>" + providers[key]["active"] + "</td>" +
-	      "<td width=7%>" + providers[key]["practical"] + "</td>" +
-	      "<td width=7%>" + providers[key]["self-disclosure"] + "</td>" +
+	    content += "<tr><td style='text-align:left'>" + providers[key]["name"] + "</td>" +
+	      "<td width=3%>" + matchScore[key] + " / 12" + "</td>" +
+	      "<td width=3%>" + providers[key]["solution-orientation"] + "</td>" +
+	      "<td width=3%>" + providers[key]["structured"] + "</td>" +
+	      "<td width=3%>" + providers[key]["active"] + "</td>" +
+	      "<td width=3%>" + providers[key]["practical"] + "</td>" +
+	      "<td width=3%>" + providers[key]["self-disclosure"] + "</td>" +
+	      "<td width=6% style='text-align:left'>" + providers[key]["therapies"].join(", ") + "</td>" +
 	      "<td>" + providers[key]["gender"] + "</td>" +
 	      "<td>" + providers[key]["birth_year"] + "</td>" +
-	      "<td>" + providers[key]["ethnicity"] + "</td>" +
+	      "<td width=8%>" + providers[key]["ethnicity"] + "</td>" +
 	      "<td>" + providers[key]["sexual_orientation"] + "</td>" +
-	      "<td style='text-align:left'>" + providers[key]["locations"].join(", ") + "</td>" +
+	      "<td width=6% style='text-align:left'>" + providers[key]["locations"].join(", ") + "</td>" +
+	      "<td style='text-align:left'><b>Days:</b> " + providers[key]["days"].join(", ") +
+	        "<br><b>Times:</b> " + providers[key]["times"].join(", ") + "</td>" +
 	      "</tr>";
 	  });
 	  content += "</tbody></table>";
@@ -264,23 +315,41 @@
 	    pair = pair.split(":");
 	    spreadsheet_hash[pair[0].trim().toLowerCase()] = pair[1].trim();
 	  });
+
+	  spreadsheet_hash["therapies"] = spreadsheet_hash["therapies"].split(",");
+	  for (var i = 0; i < spreadsheet_hash["therapies"].length; i++) {
+	    spreadsheet_hash["therapies"][i] = spreadsheet_hash["therapies"][i].trim();
+	  }
+
 	  spreadsheet_hash["location"] = spreadsheet_hash["location"].split(",");
 	  for (var i = 0; i < spreadsheet_hash["location"].length; i++) {
 	    spreadsheet_hash["location"][i] = spreadsheet_hash["location"][i].trim();
+	  }
+
+	  spreadsheet_hash["days"] = spreadsheet_hash["days"].split(",");
+	  for (var i = 0; i < spreadsheet_hash["days"].length; i++) {
+	    spreadsheet_hash["days"][i] = spreadsheet_hash["days"][i].trim();
+	  }
+
+	  spreadsheet_hash["times"] = spreadsheet_hash["times"].split(",");
+	  for (var i = 0; i < spreadsheet_hash["times"].length; i++) {
+	    spreadsheet_hash["times"][i] = spreadsheet_hash["times"][i].trim();
 	  }
 
 	  $('#self-disclosure').val(spreadsheet_hash["self-disclosure"]);
 	  $('#solution-orientation').val(spreadsheet_hash["solution-orientation"]);
 	  $('#structured').val(spreadsheet_hash["structured"]);
 	  $('#active').val(spreadsheet_hash["active"]);
+	  $('#therapies').val(spreadsheet_hash["therapies"]);
 	  $('#mentor_score').val(spreadsheet_hash["mentor score"]);
 	  $('#age').val(spreadsheet_hash["age"]);
-	  $('#gender').val(spreadsheet_hash["gender"]);
-	  $('#gender_matters').val(spreadsheet_hash["gender matters?"]);
+	  $('#gender_preference').val(spreadsheet_hash["gender preference"]);
 	  $('#ethnicity').val(spreadsheet_hash["ethnicity"]);
 	  $('#ethnicity_matters').val(spreadsheet_hash["ethnicity matters?"]);
 	  $('#lgbt').val(spreadsheet_hash["lgbt?"]);
 	  $('#location').val(spreadsheet_hash["location"]);
+	  $('#days').val(spreadsheet_hash["days"]);
+	  $('#times').val(spreadsheet_hash["times"]);
 	  $('#practical').val(spreadsheet_hash["practical"]);
 
 	  $('#sort').click();
@@ -362,7 +431,8 @@
 /***/ function(module, exports) {
 
 	var providers = {
-	  1: { "solution-orientation": 6,
+	  1: { "name": "John Clarke",
+	       "solution-orientation": 6,
 	       "structured": 6,
 	       "active": 8,
 	       "practical": 4,
@@ -371,9 +441,13 @@
 	       "birth_year": 1988,
 	       "ethnicity": "White",
 	       "sexual_orientation": "Straight",
-	       "locations": ["Noe Valley"] },
+	       "locations": ["Noe Valley"],
+	       "therapies": ["Humanistic","Cognitive Behavioral Therapy","Coaching"],
+	       "days": ["Tuesday","Wednesday"],
+	       "times": ["Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	  2: { "solution-orientation": 6,
+	  2: { "name": "Sadie Phillips",
+	       "solution-orientation": 6,
 	       "structured": 5,
 	       "active": 8,
 	       "practical": 8,
@@ -382,9 +456,13 @@
 	       "birth_year": 1983,
 	       "ethnicity": "White",
 	       "sexual_orientation": "Straight",
-	       "locations": ["Pacific Heights"] },
+	       "locations": ["Pacific Heights"],
+	       "therapies": ["Cognitive Behavioral Therapy","Interpersonal Therapy","Eclecticism","Clinical Health Psychology"],
+	       "days": ["Monday","Wednesday"],
+	       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
 
-	  3: { "solution-orientation": 8,
+	  3: { "name": "Neil Howell",
+	       "solution-orientation": 8,
 	       "structured": 8,
 	       "active": 8,
 	       "practical": 7,
@@ -393,9 +471,13 @@
 	       "birth_year": 1963,
 	       "ethnicity": "White",
 	       "sexual_orientation": "Bisexual",
-	       "locations": ["Pacific Heights"] },
+	       "locations": ["Pacific Heights"],
+	       "therapies": ["Cognitive Behavioral Therapy","Interpersonal Therapy","Coaching"],
+	       "days": ["Thursday","Saturday","Sunday"],
+	       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   4: {"solution-orientation":7,
+	   4: {"name": "Ashley Crouch",
+	       "solution-orientation":7,
 	       "structured":6,
 	       "active":9,
 	       "practical":10,
@@ -404,9 +486,13 @@
 	       "birth_year":1983,
 	       "ethnicity":"White",
 	       "sexual_orientation":"Straight",
-	       "locations": ["Hayes Valley/Lower Haight/Duboce Triangle"]},
+	       "locations": ["Hayes Valley/Lower Haight/Duboce Triangle"],
+	       "therapies": ["Psychodynamic","Humanistic","Mindfulness/Meditation"],
+	       "days": ["Monday","Wednesday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   5:     {"solution-orientation":4,
+	   5:  {"name": "Emily Mills",
+	        "solution-orientation":4,
 	   	"structured":2,
 	   	"active":6,
 	   	"practical":5,
@@ -415,9 +501,13 @@
 	   	"birth_year":1982,
 	   	"ethnicity":"White",
 	   	"sexual_orientation":"Gay/Lesbian",
-	   	"locations": ["Pacific Heights"]},
+	   	"locations": ["Pacific Heights"],
+	       "therapies": ["Psychodynamic","Interpersonal Therapy","Mindfulness/Meditation"],
+	       "days": ["Monday","Wednesday","Friday","Saturday"],
+	       "times": ["Evening (5-8pm)"]},
 
-	   6:     {"solution-orientation":3,
+	   6:  {"name": "Rochelle Greenhagen",
+	       "solution-orientation":3,
 	   	"structured":1,
 	   	"active":7,
 	   	"practical":9,
@@ -426,9 +516,13 @@
 	   	"birth_year":1984,
 	   	"ethnicity":"White",
 	   	"sexual_orientation":"Straight",
-	   	"locations": ["Marina/Cow Hollow"]},
+	   	"locations": ["Marina/Cow Hollow"],
+	       "therapies": ["Psychodynamic","Humanistic","Relational"],
+	       "days": ["Tuesday","Wednesday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)"]},
 
-	   7:     {"solution-orientation":5,
+	   7:     {"name": "Adam Snow",
+	       "solution-orientation":5,
 	   	"structured":1,
 	   	"active":5,
 	   	"practical":6,
@@ -437,9 +531,13 @@
 	   	"birth_year":1982,
 	   	"ethnicity":"White",
 	   	"sexual_orientation":"Bisexual",
-	   	"locations": ["Hayes Valley/Lower Haight/Duboce Triangle"]},
+	   	"locations": ["Hayes Valley/Lower Haight/Duboce Triangle"],
+	       "therapies": ["Psychodynamic","Humanistic","Interpersonal Therapy"],
+	       "days": ["Monday","Thursday","Saturday"],
+	       "times": ["Morning (7-11am)","Evening (5-8pm)"]},
 
-	   8:     {"solution-orientation":3,
+	   8:     {"name": "Sarah Soul",
+	       "solution-orientation":3,
 	   	"structured":5,
 	   	"active":8,
 	   	"practical":10,
@@ -448,9 +546,13 @@
 	   	"birth_year":1976,
 	   	"ethnicity":"White",
 	   	"sexual_orientation":"Gay/lesbian",
-	   	"locations": ["Castro/Twin Peaks"]},
+	   	"locations": ["Castro/Twin Peaks"],
+	       "therapies": ["Psychodynamic","Humanistic","Cognitive Behavioral Therapy","Mindfulness/Meditation","Coaching"],
+	       "days": ["Monday","Tuesday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)"]},
 
-	   9:     {"solution-orientation":7,
+	   9:     {"name": "Bradford Smallwood",
+	       "solution-orientation":7,
 	   	"structured":4,
 	   	"active":8,
 	   	"practical":10,
@@ -459,9 +561,13 @@
 	   	"birth_year":1979,
 	   	"ethnicity":"White",
 	   	"sexual_orientation":"Straight",
-	   	"locations": ["Marina/Cow Hollow"]},
+	   	"locations": ["Marina/Cow Hollow"],
+	       "therapies": ["Humanistic","Cognitive Behavioral Therapy"],
+	       "days": ["Tuesday","Thursday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   10:    {"solution-orientation":8,
+	   10:    {"name": "Diane DuBois",
+	       "solution-orientation":8,
 	   "structured":6,
 	   "active":8,
 	   "practical":10,
@@ -470,9 +576,13 @@
 	   "birth_year":1958,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Pacific Heights"]},
+	   "locations": ["Pacific Heights"],
+	       "therapies": ["Psychodynamic","Humanistic","Cognitive Behavioral Therapy","Interpersonal Therapy","Coaching"],
+	       "days": ["Tuesday","Thursday","Friday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   11:    {"solution-orientation":4,
+	   11:    {"name": "Beth Cassel",
+	       "solution-orientation":4,
 	   "structured":3,
 	   "active":7,
 	   "practical":8,
@@ -481,9 +591,13 @@
 	   "birth_year":1958,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Richmond"]},
+	   "locations": ["RichMondayd"],
+	       "therapies": ["Psychodynamic","Humanistic","Mindfulness/Meditation"],
+	       "days": ["Tuesday","Thursday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)"]},
 
-	   12:    {"solution-orientation":5,
+	   12:    {"name": "Holly Greenberg",
+	       "solution-orientation":5,
 	   "structured":0,
 	   "active":7,
 	   "practical":9,
@@ -492,9 +606,13 @@
 	   "birth_year":1970,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Pacific Heights"]},
+	   "locations": ["Pacific Heights"],
+	       "therapies": ["Psychoanalytical","Psychodynamic","Somatic Therapy"],
+	       "days": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   13:    {"solution-orientation":6,
+	   13:    {"name": "Erika Gimbel",
+	       "solution-orientation":6,
 	   "structured":3,
 	   "active":8,
 	   "practical":9,
@@ -503,9 +621,13 @@
 	   "birth_year":1970,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Unknown",
-	   "locations": ["Pacific Heights","East Bay/Berkeley"]},
+	   "locations": ["Pacific Heights","East Bay/Berkeley"],
+	       "therapies": ["Experiential Therapy","Mindfulness/Meditation","Coaching"],
+	       "days": ["Monday","Tuesday","Thursday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   14:    {"solution-orientation":4,
+	   14:    {"name": "Andrea Crapanzano",
+	       "solution-orientation":4,
 	   "structured":3,
 	   "active":5,
 	   "practical":3,
@@ -514,9 +636,13 @@
 	   "birth_year":1979,
 	   "ethnicity":"Unknown",
 	   "sexual_orientation":"Gay/lesbian",
-	   "locations": ["Hayes Valley/Lower Haight/Duboce Triangle"]},
+	   "locations": ["Hayes Valley/Lower Haight/Duboce Triangle"],
+	       "therapies": ["Psychoanalytical","Psychodynamic","Interpersonal Therapy"],
+	       "days": ["Friday"],
+	       "times": ["Afternoon (2-5pm)"]},
 
-	   15:    {"solution-orientation":7,
+	   15:    {"name": "Michael Milazzo",
+	       "solution-orientation":7,
 	   "structured":6,
 	   "active":8,
 	   "practical":8,
@@ -525,9 +651,13 @@
 	   "birth_year":1973,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Gay/lesbian",
-	   "locations": ["Financial District","Castro/Twin Peaks"]},
+	   "locations": ["Financial District","Castro/Twin Peaks"],
+	       "therapies": ["Cognitive Behavioral Therapy","Mindfulness/Meditation","Coaching"],
+	       "days": ["Wednesday","Thursday","Saturday"],
+	       "times": ["Afternoon (2-5pm)"]},
 
-	   16:    {"solution-orientation":7,
+	   16:    {"name": "Warren Miller",
+	       "solution-orientation":7,
 	   "structured":3,
 	   "active":8,
 	   "practical":10,
@@ -536,9 +666,13 @@
 	   "birth_year":1969,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Financial District"]},
+	   "locations": ["Financial District"],
+	       "therapies": ["Psychodynamic","Humanistic","Cognitive Behavioral Therapy","Interpersonal Therapy","Experiential Therapy","Eclecticism","Mindfulness/Meditation"],
+	       "days": ["Friday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)"]},
 
-	   17:    {"solution-orientation":7,
+	   17:    {"name": "Aaron Hagaman",
+	       "solution-orientation":7,
 	   "structured":6,
 	   "active":8,
 	   "practical":3,
@@ -547,9 +681,13 @@
 	   "birth_year":1980,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Gay/lesbian",
-	   "locations": ["Hayes Valley/Lower Haight/Duboce Triangle","Castro/Twin Peaks"]},
+	   "locations": ["Hayes Valley/Lower Haight/Duboce Triangle","Castro/Twin Peaks"],
+	       "therapies": ["Experiential Therapy","Somatic Therapy"],
+	       "days": ["Tuesday","Wednesday","Thursday"],
+	       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
 
-	   18:    {"solution-orientation":5,
+	   18:    {"name": "Manami Yamamoto",
+	       "solution-orientation":5,
 	   "structured":7,
 	   "active":5,
 	   "practical":9,
@@ -558,9 +696,13 @@
 	   "birth_year":1979,
 	   "ethnicity":"Asian or Pacific Islander",
 	   "sexual_orientation":"Straight",
-	   "locations": ["East Bay/Berkeley","South Bay","Laurel Heights"]},
+	   "locations": ["East Bay/Berkeley","South Bay","Laurel Heights"],
+	       "therapies": ["Jungian Psychotherapy","Humanistic","Cognitive Behavioral Therapy","Mindfulness/Meditation","Coaching","Existential Therapy","Expressive Arts Therapy"],
+	       "days": ["Monday","Tuesday","Wednesday"],
+	       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   19:    {"solution-orientation":5,
+	   19:    {"name": "Gabriel Thibaut de Maisieres",
+	       "solution-orientation":5,
 	   "structured":3,
 	   "active":7,
 	   "practical":7,
@@ -569,9 +711,13 @@
 	   "birth_year":1965,
 	   "ethnicity":"Unknown",
 	   "sexual_orientation":"Unknown",
-	   "locations": ["Financial District","Union Square/Mid-Market"]},
+	   "locations": ["Financial District","Union Square/Mid-Market"],
+	       "therapies": ["Cognitive Behavioral Therapy","Interpersonal Therapy","Experiential Therapy","Coaching","Psychodrama"],
+	       "days": ["Wednesday","Friday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   20:    {"solution-orientation":5,
+	   20:    {"name": "Stacey McGuirl",
+	       "solution-orientation":5,
 	   "structured":3,
 	   "active":7,
 	   "practical":5,
@@ -580,9 +726,13 @@
 	   "birth_year":1980,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Bisexual",
-	   "locations": ["Financial District","SoMa"]},
+	   "locations": ["Financial District","SoMa"],
+	       "therapies": ["Psychoanalytical","Cognitive Behavioral Therapy","Coaching"],
+	       "days": ["Monday","Wednesday","Saturday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   21:    {"solution-orientation":9,
+	   21:    {"name": "Tess Brigham",
+	       "solution-orientation":9,
 	   "structured":5,
 	   "active":9,
 	   "practical":10,
@@ -591,9 +741,13 @@
 	   "birth_year":1973,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Financial District","East Bay/Berkeley"]},
+	   "locations": ["Financial District","East Bay/Berkeley"],
+	       "therapies": ["Cognitive Behavioral Therapy","Coaching"],
+	       "days": ["Wednesday"],
+	       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   22:    {"solution-orientation":8,
+	   22:    {"name": "Hillary Dupuis",
+	       "solution-orientation":8,
 	   "structured":5,
 	   "active":8,
 	   "practical":10,
@@ -602,9 +756,13 @@
 	   "birth_year":1972,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Mission/Dolores/Bernal Heights"]},
+	   "locations": ["Mission/Dolores/Bernal Heights"],
+	       "therapies": ["Humanistic","Cognitive Behavioral Therapy","Mindfulness/Meditation"],
+	       "days": ["Wednesday","Thursday"],
+	       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
 
-	   23:    {"solution-orientation":7,
+	   23:    {"name": "Jessica Harvey",
+	       "solution-orientation":7,
 	   "structured":2,
 	   "active":8,
 	   "practical":10,
@@ -613,19 +771,28 @@
 	   "birth_year":1981,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Financial District","Marina/Cow Hollow"]},
+	   "locations": ["Financial District","Marina/Cow Hollow"],
+	       "therapies": ["Humanistic","Interpersonal Therapy","Eclecticism"],
+	       "days": ["Monday","Thursday"],
+	       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
 
-	   24:    {"solution-orientation":4,
+	   24:    {"name": "Alicia Stephen",
+	       "solution-orientation":4,
 	   "structured":4,
-	   "active":8,"practical":7,
+	   "active":8,
+	   "practical":7,
 	   "self-disclosure":3,
 	   "gender":"Female",
 	   "birth_year":1988,
 	   "ethnicity":"Asian or Pacific Islander",
 	   "sexual_orientation":"Pansexual",
-	   "locations": ["Mission/Dolores/Bernal Heights"]},
+	   "locations": ["Mission/Dolores/Bernal Heights"],
+	       "therapies": ["Humanistic","Cognitive Behavioral Therapy","Interpersonal Therapy","Experiential Therapy","Coaching","Drama Therapy And Arts Therapy"],
+	       "days": ["Tuesday","Wednesday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   25:    {"solution-orientation":7,
+	   25:    {"name": "Jo Anna Costa",
+	       "solution-orientation":7,
 	   "structured":6,
 	   "active":8,
 	   "practical":10,
@@ -634,9 +801,13 @@
 	   "birth_year":1975,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Peninsula"]},
+	   "locations": ["Peninsula"],
+	       "therapies": ["Cognitive Behavioral Therapy","Eclecticism","Coaching","Solution Focused"],
+	       "days": ["Thursday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)"]},
 
-	   26:    {"solution-orientation":9,
+	   26:    {"name": "Barbara Lankamp-Kochis",
+	       "solution-orientation":9,
 	   "structured":8,
 	   "active":10,
 	   "practical":10,
@@ -645,9 +816,13 @@
 	   "birth_year":1984,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Martinez"]},
+	   "locations": ["Martinez"],
+	       "therapies": ["Cognitive Behavioral Therapy","Interpersonal Therapy","Experiential Therapy"],
+	       "days": ["Monday","Tuesday","Wednesday","Thursday"],
+	       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   27:    {"solution-orientation":8,
+	   27:    {"name": "Jennifer Normoyle",
+	       "solution-orientation":8,
 	   "structured":3,
 	   "active":6,
 	   "practical":7,
@@ -656,9 +831,13 @@
 	   "birth_year":1986,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Mission/Dolores/Bernal Heights"]},
+	   "locations": ["Mission/Dolores/Bernal Heights"],
+	       "therapies": ["Humanistic","Cognitive Behavioral Therapy","Interpersonal Therapy"],
+	        "days": ["Wednesday","Thursday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   28:    {"solution-orientation":7,
+	   28:    {"name": "Natasha Collins",
+	       "solution-orientation":7,
 	   "structured":5,
 	   "active":7,
 	   "practical":8,
@@ -667,19 +846,27 @@
 	   "birth_year":1976,
 	   "ethnicity":"Multiracial",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Financial District"]},
+	   "locations": ["Financial District"],
+	       "therapies": ["Cognitive Behavioral Therapy"],
+	       "days": ["Saturday"],
+	       "times": ["Morning (7-11am)"]},
 
-	   29:    {"solution-orientation":5,
+	   29:    {"name": "Senna Osby",
+	       "solution-orientation":5,
 	   "structured":0,
 	   "active":5,
 	   "practical":10,
 	   "self-disclosure":0,
 	   "gender":"Female","birth_year":1976,
-	   "ethnicity":"Black or African American",
+	   "ethnicity":"Black or AFridaycan American",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Lower Pacific Heights"]},
+	   "locations": ["Lower Pacific Heights"],
+	       "therapies": ["Psychodynamic","Eclecticism","Person-Centered Therapy"],
+	       "days": ["Tuesday","Saturday"],
+	       "times": ["Morning (7-11am)","Evening (5-8pm)"]},
 
-	   30:    {"solution-orientation":6,
+	   30:    {"name": "Lori Fink",
+	       "solution-orientation":6,
 	   "structured":3,
 	   "active":8,
 	   "practical":8,"self-disclosure":6,
@@ -687,9 +874,13 @@
 	   "birth_year":1972,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Gay/lesbian",
-	   "locations": ["Mission/Dolores/Bernal Heights"]},
+	   "locations": ["Mission/Dolores/Bernal Heights"],
+	       "therapies": ["Psychodynamic","Cognitive Behavioral Therapy","Eclecticism","Mindfulness/Meditation","AEDP"],
+	        "days": ["Wednesday","Thursday"],
+	       "times": ["Midday (11am-2pm)","Evening (5-8pm)"]},
 
-	   31:    {"solution-orientation":5,
+	   31:    {"name": "Amy Swart",
+	       "solution-orientation":5,
 	   "structured":3,
 	   "active":5,
 	   "practical":7,
@@ -698,9 +889,13 @@
 	   "birth_year":1985,
 	   "ethnicity":"Multiracial",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Financial District","Union Square/Mid-Market"]},
+	   "locations": ["Financial District","Union Square/Mid-Market"],
+	       "therapies": ["Humanistic","Interpersonal Therapy","Mindfulness/Meditation"],
+	       "days": ["Tuesday","Thursday"],
+	       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
 
-	   32:    {"solution-orientation":5,
+	   32:    {"name": "Liz Michaud",
+	       "solution-orientation":5,
 	   "structured":5,
 	   "active":5,
 	   "practical":8,
@@ -709,9 +904,13 @@
 	   "birth_year":1985,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Questioning/other",
-	   "locations": ["Mission/Dolores/Bernal Heights"]},
+	   "locations": ["Mission/Dolores/Bernal Heights"],
+	       "therapies": ["Psychodynamic","Humanistic","Gestalt"],
+	       "days": ["Friday","Saturday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   33:    {"solution-orientation":3,
+	   33:    {"name": "Clark Hsu",
+	       "solution-orientation":3,
 	   "structured":4,
 	   "active":7,
 	   "practical":8,
@@ -720,9 +919,13 @@
 	   "birth_year":1989,
 	   "ethnicity":"Asian or Pacific Islander",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Mission/Dolores/Bernal Heights"]},
+	   "locations": ["Mission/Dolores/Bernal Heights"],
+	       "therapies": ["Humanistic","Mindfulness/Meditation"],
+	       "days": ["Wednesday"],
+	       "times": ["Morning (7-11am)"]},
 
-	   34:    {"solution-orientation":5,
+	   34:    {"name": "Talia Recht",
+	       "solution-orientation":5,
 	   "structured":4,
 	   "active":9,
 	   "practical":9,
@@ -731,9 +934,13 @@
 	   "birth_year":1987,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Financial District"]},
+	   "locations": ["Financial District"],
+	       "therapies": ["Psychodynamic","Cognitive Behavioral Therapy","Eclecticism"],
+	       "days": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   35:    {"solution-orientation":5,
+	   35:    {"name": "Zeynep Kagan",
+	       "solution-orientation":5,
 	   "structured":5,
 	   "active":7,
 	   "practical":7,
@@ -742,9 +949,13 @@
 	   "birth_year":1982,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Hayes Valley/Lower Haight/Duboce Triangle","Castro/Twin Peaks"]},
+	   "locations": ["Hayes Valley/Lower Haight/Duboce Triangle","Castro/Twin Peaks"],
+	       "therapies": ["Psychodynamic","Humanistic","Interpersonal Therapy"],
+	       "days": ["Monday","Tuesday"],
+	       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
 
-	   36:    {"solution-orientation":4,
+	   36:    {"name": "Giancarlo Scherillo",
+	       "solution-orientation":4,
 	   "structured":2,
 	   "active":5,
 	   "practical":8,
@@ -753,9 +964,13 @@
 	   "birth_year":1984,
 	   "ethnicity":"Multiracial",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Richmond"]},
+	   "locations": ["RichMondayd"],
+	       "therapies": ["Psychodynamic","Mindfulness/Meditation"],
+	       "days": ["Tuesday","Thursday","Friday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   37:    {"solution-orientation":5,
+	   37:    {"name": "Emily Adams",
+	       "solution-orientation":5,
 	   "structured":3,
 	   "active":6,
 	   "practical":8,
@@ -764,9 +979,13 @@
 	   "birth_year":1989,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Questioning/other",
-	   "locations": ["Union Square/Mid-Market"]},
+	   "locations": ["Union Square/Mid-Market"],
+	       "therapies": ["Psychodynamic","Humanistic","Interpersonal Therapy","Mindfulness/Meditation"],
+	       "days": ["Monday","Tuesday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   38:    {"solution-orientation":10,
+	   38:    {"name": "Cosmin Gheorghe",
+	       "solution-orientation":10,
 	   "structured":7,
 	   "active":10,
 	   "practical":10,
@@ -775,9 +994,13 @@
 	   "birth_year":1974,
 	   "ethnicity":"Multiracial",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Financial District"]},
+	   "locations": ["Financial District"],
+	       "therapies": ["Cognitive Behavioral Therapy","Eclecticism","Coaching"],
+	       "days": ["Tuesday","Thursday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   39:    {"solution-orientation":7,
+	   39:    {"name": "Chip Murray",
+	       "solution-orientation":7,
 	   "structured":3,
 	   "active":8,
 	   "practical":9,
@@ -786,9 +1009,13 @@
 	   "birth_year":1966,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Unknown",
-	   "locations": ["Union Square/Mid-Market"]},
+	   "locations": ["Union Square/Mid-Market"],
+	       "therapies": ["Psychodynamic","Cognitive Behavioral Therapy","Interpersonal Therapy","Experiential Therapy","Eclecticism"],
+	       "days": ["Tuesday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)"]},
 
-	   40:    {"solution-orientation":8,
+	   40:    {"name": "Dimitra Farmas",
+	       "solution-orientation":8,
 	   "structured":3,
 	   "active":6,
 	   "practical":9,
@@ -797,9 +1024,13 @@
 	   "birth_year":1978,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Castro/Twin Peaks"]},
+	   "locations": ["Castro/Twin Peaks"],
+	       "therapies": ["Cognitive Behavioral Therapy","Interpersonal Therapy","Mindfulness/Meditation"],
+	       "days": ["Monday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   41:    {"solution-orientation":4,
+	   41:    {"name": "Elizabeth Heuser",
+	       "solution-orientation":4,
 	   "structured":3,
 	   "active":5,
 	   "practical":7,
@@ -808,9 +1039,13 @@
 	   "birth_year":1978,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Financial District"]},
+	   "locations": ["Financial District"],
+	       "therapies": ["Humanistic","Mindfulness/Meditation"],
+	       "days": ["Saturday"],
+	       "times": ["Morning (7-11am)","Evening (5-8pm)"]},
 
-	   42:    {"solution-orientation":7,
+	   42:    {"name": "Chia Ning (Michelle) Chang",
+	       "solution-orientation":7,
 	   "structured":3,
 	   "active":7,
 	   "practical":7,
@@ -819,9 +1054,13 @@
 	   "birth_year":1988,
 	   "ethnicity":"Asian or Pacific Islander",
 	   "sexual_orientation":"Bisexual",
-	   "locations": ["Noe Valley"]},
+	   "locations": ["Noe Valley"],
+	       "therapies": ["Psychodynamic","Experiential Therapy","Coaching","Strategic Family Therapy"],
+	       "days": ["Wednesday","Thursday","Sunday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)"]},
 
-	   43:    {"solution-orientation":6,
+	   43:    {"name": "Madhu Batheja",
+	       "solution-orientation":6,
 	   "structured":1,
 	   "active":8,
 	   "practical":9,
@@ -830,9 +1069,13 @@
 	   "birth_year":1951,
 	   "ethnicity":"Unknown",
 	   "sexual_orientation":"Unknown",
-	   "locations": ["Pacific Heights"]},
+	   "locations": ["Pacific Heights"],
+	       "therapies": ["Psychodynamic","Eclecticism","Somatic Therapy"],
+	       "days": ["Tuesday","Wednesday","Thursday"],
+	       "times": ["Afternoon (2-5pm)"]},
 
-	   44:    {"solution-orientation":6,
+	   44:    {"name": "Holly Micheletos",
+	       "solution-orientation":6,
 	   "structured":5,
 	   "active":7,
 	   "practical":9,
@@ -841,18 +1084,175 @@
 	   "birth_year":1966,
 	   "ethnicity":"White",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Richmond"]},
+	   "locations": ["RichMondayd"],
+	       "therapies": ["Psychodynamic","Cognitive Behavioral Therapy","Interpersonal Therapy"],
+	       "days": ["Monday","Tuesday","Wednesday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
-	   45:    {"solution-orientation":7,
+	45:    {"name": "Nadia Ashjaee",
+	       "solution-orientation":7,
 	   "structured":7,
 	   "active":7,
 	   "practical":8,
 	   "self-disclosure":6,
 	   "gender":"Female",
 	   "birth_year":1980,
-	   "ethnicity":"Middle Eastern or North African",
+	   "ethnicity":"Middle Eastern or North AFridaycan",
 	   "sexual_orientation":"Straight",
-	   "locations": ["Union Square/Mid-Market"]}
+	   "locations": ["Union Square/Mid-Market"],
+	       "therapies": ["Interpersonal Therapy","Experiential Therapy"],
+	       "days": ["Monday","Tuesday"],
+	       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+
+	46:    {"name": "Kip Williams",
+	       "solution-orientation":5,
+	   "structured":2,
+	   "active":7,
+	   "practical":3,
+	   "self-disclosure":7,
+	   "gender":"Male",
+	   "birth_year":1982,
+	   "ethnicity":"White",
+	   "sexual_orientation":"Gay/lesbian",
+	   "locations": ["Civic Center"],
+	       "therapies": ["Humanistic","Mindfulness/Meditation","Acceptance And Commitment Therapy"],
+	       "days": ["Tuesday"],
+	       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
+
+	47:    {"name": "Tracy McGillis",
+	       "solution-orientation":6,
+	   "structured":4,
+	   "active":8,
+	   "practical":9,
+	   "self-disclosure":5,
+	   "gender":"Female",
+	   "birth_year":1974,
+	   "ethnicity":"White",
+	   "sexual_orientation":"Straight",
+	   "locations": ["Union Square/Mid-Market"],
+	       "therapies": ["Humanistic","Cognitive Behavioral Therapy","Interpersonal Therapy","Eclecticism","Mindfulness/Meditation","Coaching"],
+	       "days": ["Wednesday","Thursday","Friday"],
+	       "times": ["Morning (7-11am)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+
+	48:    {"name": "Lauren Korshak",
+	       "solution-orientation":5,
+	   "structured":5,
+	   "active":7,
+	   "practical":8,
+	   "self-disclosure":1,
+	   "gender":"Female",
+	   "birth_year":1983,
+	   "ethnicity":"White",
+	   "sexual_orientation":"Straight",
+	   "locations": ["Financial District","Hayes Valley/Lower Haight/Duboce Triangle"],
+	       "therapies": ["Psychodynamic","Jungian Psychotherapy","Cognitive Behavioral Therapy","Interpersonal Therapy","Experiential Therapy","Mindfulness/Meditation","Coaching"],
+	       "days": ["Friday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)"]},
+
+	49:    {"name": "Laura Futransky",
+	       "solution-orientation":3,
+	   "structured":2,
+	   "active":6,
+	   "practical":9,
+	   "self-disclosure":2,
+	   "gender":"Female",
+	   "birth_year":1983,
+	   "ethnicity":"White",
+	   "sexual_orientation":"Straight",
+	   "locations": ["Union Square/Mid-Market"],
+	       "therapies": ["Psychodynamic","Experiential Therapy","Acceptance And Commitment Therapy"],
+	       "days": ["Tuesday","Wednesday","Thursday"],
+	       "times": ["Morning (7-11am)","Evening (5-8pm)"]},
+
+	50:    {"name": "JS Very",
+	       "solution-orientation":5,
+	   "structured":5,
+	   "active":7,
+	   "practical":7,
+	   "self-disclosure":6,
+	   "gender":"Trans FTM",
+	   "birth_year":1982,
+	   "ethnicity":"White",
+	   "sexual_orientation":"Pansexual",
+	   "locations": ["Union Square/Mid-Market"],
+	       "therapies": ["Humanistic","Cognitive Behavioral Therapy","Mindfulness/Meditation"],
+	       "days": ["Wednesday","Thursday","Saturday"],
+	       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+
+	51:    {"name": "Doug Ronning",
+	       "solution-orientation":6,
+	   "structured":7,
+	   "active":7,
+	   "practical":9,
+	   "self-disclosure":5,
+	   "gender":"Male",
+	   "birth_year":1962,
+	   "ethnicity":"White",
+	   "sexual_orientation":"Gay/lesbian",
+	   "locations": ["Noe Valley"],
+	       "therapies": ["Jungian Psychotherapy","Experiential Therapy","Mindfulness/Meditation"],
+	       "days": ["Monday","Tuesday"],
+	       "times": ["Afternoon (2-5pm)"]},
+
+	52:    {"name": "Nicole O'Connor",
+	       "solution-orientation":4,
+	   "structured":3,
+	   "active":7,
+	   "practical":8,
+	   "self-disclosure":3,
+	   "gender":"Female",
+	   "birth_year":1972,
+	   "ethnicity":"White",
+	   "sexual_orientation":"Straight",
+	   "locations": ["Noe Valley"],
+	       "therapies": ["Psychodynamic","Cognitive Behavioral Therapy","Interpersonal Therapy","Mindfulness/Meditation","Coaching"],
+	       "days": ["Tuesday","Thursday"],
+	       "times": ["Midday (11am-2pm)"]},
+
+	53:    {"name": "Betty Michaud",
+	       "solution-orientation":3,
+	   "structured":3,
+	   "active":5,
+	   "practical":5,
+	   "self-disclosure":4,
+	   "gender":"Female",
+	   "birth_year":1971,
+	   "ethnicity":"Asian or Pacific Islander",
+	   "sexual_orientation":"Straight",
+	   "locations": ["Noe Valley"],
+	       "therapies": ["Humanistic","Interpersonal Therapy","Mindfulness/Meditation"],
+	       "days": ["Thursday"],
+	       "times": ["Afternoon (2-5pm)"]},
+
+	54:    {"name": "Travis Robinson",
+	       "solution-orientation":7,
+	   "structured":7,
+	   "active":8,
+	   "practical":5,
+	   "self-disclosure":8,
+	   "gender":"Male",
+	   "birth_year":1972,
+	   "ethnicity":"White",
+	   "sexual_orientation":"Straight",
+	   "locations": ["Marina/Cow Hollow"],
+	       "therapies": ["Humanistic","Experiential Therapy","Mindfulness/Meditation"],
+	       "days": ["Monday","Tuesday","Wednesday","Friday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+
+	55:    {"name": "Julia Lehrman",
+	       "solution-orientation":8,
+	   "structured":7,
+	   "active":7,
+	   "practical":8,
+	   "self-disclosure":5,
+	   "gender":"Female",
+	   "birth_year":1986,
+	   "ethnicity":"White",
+	   "sexual_orientation":"Straight",
+	   "locations": ["Financial District","Union Square/Mid-Market","SoMa"],
+	       "therapies": ["Cognitive Behavioral Therapy","Mindfulness/Meditation","Coaching"],
+	       "days": ["Wednesday","Friday"],
+	       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
 
 	};
 
