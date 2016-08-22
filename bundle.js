@@ -52,28 +52,6 @@
 	var todays_date = new Date();
 	var todays_year = todays_date.getFullYear();
 
-	// For determining locations of providers.
-	// var console_locations = [];
-	// providerKeys.forEach(function(key) {
-	//   providers[key]["locations"].forEach(function(location) {
-	//     if (!console_locations.includes(location)) {
-	//       console_locations.push(location);
-	//     }
-	//   });
-	// });
-	// console.log(console_locations);
-
-	// For determining therapies of providers.
-	// var console_therapies = [];
-	// providerKeys.forEach(function(key) {
-	//   providers[key]["therapies"].forEach(function(therapy) {
-	//     if (!console_therapies.includes(therapy)) {
-	//       console_therapies.push(therapy);
-	//     }
-	//   });
-	// });
-	// console.log(console_therapies);
-
 	$('#sort').on("click", function () {
 	  var matchScore = {};
 
@@ -311,15 +289,15 @@
 	  var spreadsheet_hash = {};
 	  var spreadsheet_values = $("#spreadsheet-copy-info").val().trim();
 	  spreadsheet_values = spreadsheet_values.split("\n");
+
 	  spreadsheet_values.forEach(function(pair) {
-	    console.log(spreadsheet_values);
-	    console.log(pair);
-
 	    pair = pair.split(":");
-	    spreadsheet_hash[pair[0].trim().toLowerCase()] = pair[1].trim();
+	    var key = pair[0].trim().toLowerCase()
 
-	    if (["solution-orientation", "structure", "active", "practical", "self-disclosure"].includes(pair[0].trim().toLowerCase())) {
-	      spreadsheet_hash[pair[0].trim().toLowerCase()] = (parseInt(pair[1].trim().slice(0, -1)) * 0.01);
+	    if (["solution-orientation", "structured", "active", "practical", "self-disclosure"].includes(key)) {
+	      spreadsheet_hash[key] = (parseInt(pair[1].trim().slice(0, -1)) * 0.01);
+	    } else {
+	      spreadsheet_hash[key] = pair[1].trim();
 	    }
 	  });
 
@@ -353,7 +331,7 @@
 
 	  $('#self-disclosure').val((spreadsheet_hash["self-disclosure"] || "0"));
 	  $('#solution-orientation').val((spreadsheet_hash["solution-orientation"] || "0"));
-	  $('#structured').val((spreadsheet_hash["structure"] || "0"));
+	  $('#structured').val((spreadsheet_hash["structured"] || "0"));
 	  $('#active').val((spreadsheet_hash["active"] || "0"));
 	  $('#practical').val((spreadsheet_hash["active"] || "0")); //Placeholder - '#practical' is not currently in use.
 

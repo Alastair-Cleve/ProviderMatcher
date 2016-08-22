@@ -19,7 +19,7 @@
           for (var i = 0; i < 101; i++) {
             optionString += "<option value='" + (i * 0.01) + "'>" + i + "%</option>";
           }
-          $('#label-solution-orientation').after("<select id='solution-orientation'>" + optionString + "</select><br>");
+          $('#label-solution-orientation').after("<select style='margin-left:4px' id='solution-orientation'>" + optionString + "</select><br>");
         </script>
 
         <div class="label" id="label-structured">Structured:</div>
@@ -28,7 +28,7 @@
           for (var i = 0; i < 101; i++) {
             optionString += "<option value='" + (i * 0.01) + "'>" + i + "%</option>";
           }
-          $('#label-structured').after("<select id='structured'>" + optionString + "</select><br>");
+          $('#label-structured').after("<select style='margin-left:4px' id='structured'>" + optionString + "</select><br>");
         </script>
 
         <div class="label" id="label-active">Active:</div>
@@ -37,7 +37,7 @@
           for (var i = 0; i < 101; i++) {
             optionString += "<option value='" + (i * 0.01) + "'>" + i + "%</option>";
           }
-          $('#label-active').after("<select id='active'>" + optionString + "</select><br>");
+          $('#label-active').after("<select style='margin-left:4px' id='active'>" + optionString + "</select><br>");
         </script>
 
         <div class="label" id="label-practical">Practical:</div>
@@ -46,7 +46,7 @@
           for (var i = 0; i < 101; i++) {
             optionString += "<option value='" + (i * 0.01) + "'>" + i + "%</option>";
           }
-          $('#label-practical').after("<select id='practical'>" + optionString + "</select><br>");
+          $('#label-practical').after("<select style='margin-left:4px' id='practical'>" + optionString + "</select><br>");
         </script>
 
         <div class="label" id=label-self-disclosure>Self-Disclosure:</div>
@@ -55,7 +55,7 @@
           for (var i = 0; i < 101; i++) {
             optionString += "<option value='" + (i * 0.01) + "'>" + i + "%</option>";
           }
-          $('#label-self-disclosure').after("<select id='self-disclosure'>" + optionString + "</select><br>");
+          $('#label-self-disclosure').after("<select style='margin-left:4px' id='self-disclosure'>" + optionString + "</select><br>");
         </script>
 
         <div class="label">Therapies (Cmd for multiple):</div>
@@ -121,7 +121,7 @@
           <option value="N/A">N/A</option>
         </select><br>
 
-        <div class="label">Ethnicity matters?:</div>
+        <div class="label">Ethnicity Matters?:</div>
         <select id="ethnicity_matters">
           <option selected value="Not important">Not important</option>
           <option value="Moderately important">Moderately important</option>
@@ -194,21 +194,21 @@
       <div class="flex-item" id="spreadsheet-input">
         <h3>Or paste a spreadsheet below.</h3>
         <textarea id="spreadsheet-copy-info" rows="19" cols="50" style="resize: none" placeholder="Paste the spreadsheet values in like so (note that colons are required):
-Solution-Orientation: 5
-Structured: 6
-Active: 6
-Practical: 5
-Self-Disclosure: 4
+Solution-Orientation: 50%
+Structured: 65%
+Active: 60%
+Practical: 52%
+Self-Disclosure: 42%
 Therapies: AEDP, Clinical Health Psychology
 Age: 25
 Mentor Score: 6
-Gender Preference: Female
+Gender Preference: Women
 Ethnicity: Middle Eastern
-Ethnicity matters?: Yes
-LGBT?: No
+Ethnicity Matters?: Yes
+Sexual Orientation: Straight
 Location: Financial District, SoMa
 Days: Monday, Tuesday
-Times: Midday (11am-2pm), Evening (5-8pm)"></textarea><br><br>
+Times: Midday (11am - 2pm), Evening (5pm - 8pm)"></textarea><br><br>
         <button type="button" id="populate">Find Providers</button>
         <a class="button" id="modal" href="#trigger_id">Export as CSV</a>
       </div>
