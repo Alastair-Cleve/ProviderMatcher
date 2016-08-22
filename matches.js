@@ -1,7 +1,7 @@
 jQuery.fn.tableToCSV = require('./jquery.tableToCSV.js');
 
 var providers = require("./database.js");
-var matchRange = 1;
+var matchRange = 0.1;
 var providerKeys = Object.keys(providers);
 var todays_date = new Date();
 var todays_year = todays_date.getFullYear();
@@ -31,16 +31,16 @@ var todays_year = todays_date.getFullYear();
 $('#sort').on("click", function () {
   var matchScore = {};
 
-  var patientSelfDisclosure = parseInt($('#self-disclosure').val());
-  var patientSolutionOrientation = parseInt($('#solution-orientation').val());
-  var patientStructured = parseInt($('#structured').val());
-  var patientActive = parseInt($('#active').val());
+  var patientSelfDisclosure = parseFloat($('#self-disclosure').val());
+  var patientSolutionOrientation = parseFloat($('#solution-orientation').val());
+  var patientStructured = parseFloat($('#structured').val());
+  var patientActive = parseFloat($('#active').val());
   var patientMentorScore = parseInt($('#mentor_score').val());
   var patientAge = parseInt($('#age').val().trim());
   var genderPreference = $('#gender_preference').val();
   var patientEthnicity = $('#ethnicity').val();
   var ethnicityMatters = $('#ethnicity_matters').val();
-  var patientLGBT = $('#lgbt').val();
+  var patientSexualOrientation = $('#sexual_orientation').val();
   var patientLocation = $('#location').val();
   var therapiesPreference = $('#therapies').val();
   var daysPreference = $('#days').val();
@@ -55,9 +55,9 @@ $('#sort').on("click", function () {
   }
 
   // Initial setup of matchScore object.
-  if (patientSelfDisclosure > 6) {
+  if (patientSelfDisclosure > 0.6) {
     providerKeys.forEach(function(key) {
-      if (providers[key]["self-disclosure"] > 6) {
+      if ((providers[key]["self-disclosure"] * 0.1) > 6) {
         matchScore[key] = 1;
       } else {
         matchScore[key] = 0;
@@ -71,18 +71,18 @@ $('#sort').on("click", function () {
 
   // Filter for other criteria.
   providerKeys.forEach(function(key) {
-    if (providers[key]["solution-orientation"] <= (patientSolutionOrientation + matchRange)
-      && providers[key]["solution-orientation"] >= (patientSolutionOrientation - matchRange)) {
+    if ((providers[key]["solution-orientation"] * 0.1) <= (patientSolutionOrientation + matchRange)
+      && (providers[key]["solution-orientation"] * 0.1) >= (patientSolutionOrientation - matchRange)) {
         matchScore[key]++;
       }
 
-    if (providers[key]["structured"] <= (patientStructured + matchRange)
-      && providers[key]["structured"] >= (patientStructured - matchRange)) {
+    if ((providers[key]["structured"] * 0.1) <= (patientStructured + matchRange)
+      && (providers[key]["structured"] * 0.1) >= (patientStructured - matchRange)) {
         matchScore[key]++;
       }
 
-    if (providers[key]["active"] <= (patientActive + matchRange)
-      && providers[key]["active"] >= (patientActive - matchRange)) {
+    if ((providers[key]["active"] * 0.1) <= (patientActive + matchRange)
+      && (providers[key]["active"] * 0.1) >= (patientActive - matchRange)) {
         matchScore[key]++;
       }
 
@@ -113,15 +113,19 @@ $('#sort').on("click", function () {
       }
     }
 
-    if (genderPreference === "Male" || genderPreference === "Female") {
-      if (providers[key]["gender"] === genderPreference) {
+    if (genderPreference === "Men") {
+      if (providers[key]["gender"] === "Male") {
+        matchScore[key]++;
+      }
+    } else if (genderPreference === "Women") {
+      if (providers[key]["gender"] === "Female") {
         matchScore[key]++;
       }
     } else {
       matchScore[key]++;
     }
 
-    if (ethnicityMatters === "Yes") {
+    if (ethnicityMatters === "Very important" || ethnicityMatters === "Moderately important") {
       if (providers[key]["ethnicity"] === patientEthnicity) {
         matchScore[key]++;
       }
@@ -129,11 +133,7 @@ $('#sort').on("click", function () {
       matchScore[key]++;
     }
 
-    if (patientLGBT === "Yes") {
-      if (providers[key]["sexual_orientation"] !== "Straight") {
-        matchScore[key]++;
-      }
-    } else {
+    if (providers[key]["sexual_orientation"] === patientSexualOrientation) {
       matchScore[key]++;
     }
 
@@ -263,48 +263,64 @@ $('#sort').on("click", function () {
 
 $("#populate").click(function() {
   var spreadsheet_hash = {};
-  var spreadsheet_values = $("#spreadsheet-copy-info").val();
+  var spreadsheet_values = $("#spreadsheet-copy-info").val().trim();
   spreadsheet_values = spreadsheet_values.split("\n");
   spreadsheet_values.forEach(function(pair) {
+    console.log(spreadsheet_values);
+    console.log(pair);
+
     pair = pair.split(":");
     spreadsheet_hash[pair[0].trim().toLowerCase()] = pair[1].trim();
+
+    if (["solution-orientation", "structure", "active", "practical", "self-disclosure"].includes(pair[0].trim().toLowerCase())) {
+      spreadsheet_hash[pair[0].trim().toLowerCase()] = (parseInt(pair[1].trim().slice(0, -1)) * 0.01);
+    }
   });
 
-  spreadsheet_hash["therapies"] = spreadsheet_hash["therapies"].split(",");
-  for (var i = 0; i < spreadsheet_hash["therapies"].length; i++) {
-    spreadsheet_hash["therapies"][i] = spreadsheet_hash["therapies"][i].trim();
+  if (spreadsheet_hash["therapies"] != undefined) {
+    spreadsheet_hash["therapies"] = spreadsheet_hash["therapies"].split(",");
+    for (var i = 0; i < spreadsheet_hash["therapies"].length; i++) {
+      spreadsheet_hash["therapies"][i] = spreadsheet_hash["therapies"][i].trim();
+    }
   }
 
-  spreadsheet_hash["location"] = spreadsheet_hash["location"].split(",");
-  for (var i = 0; i < spreadsheet_hash["location"].length; i++) {
-    spreadsheet_hash["location"][i] = spreadsheet_hash["location"][i].trim();
+  if (spreadsheet_hash["location"] != undefined) {
+    spreadsheet_hash["location"] = spreadsheet_hash["location"].split(",");
+    for (var i = 0; i < spreadsheet_hash["location"].length; i++) {
+      spreadsheet_hash["location"][i] = spreadsheet_hash["location"][i].trim();
+    }
   }
 
-  spreadsheet_hash["days"] = spreadsheet_hash["days"].split(",");
-  for (var i = 0; i < spreadsheet_hash["days"].length; i++) {
-    spreadsheet_hash["days"][i] = spreadsheet_hash["days"][i].trim();
+  if (spreadsheet_hash["days"] != undefined) {
+    spreadsheet_hash["days"] = spreadsheet_hash["days"].split(",");
+    for (var i = 0; i < spreadsheet_hash["days"].length; i++) {
+      spreadsheet_hash["days"][i] = spreadsheet_hash["days"][i].trim();
+    }
   }
 
-  spreadsheet_hash["times"] = spreadsheet_hash["times"].split(",");
-  for (var i = 0; i < spreadsheet_hash["times"].length; i++) {
-    spreadsheet_hash["times"][i] = spreadsheet_hash["times"][i].trim();
+  if (spreadsheet_hash["times"] != undefined) {
+    spreadsheet_hash["times"] = spreadsheet_hash["times"].split(",");
+    for (var i = 0; i < spreadsheet_hash["times"].length; i++) {
+      spreadsheet_hash["times"][i] = spreadsheet_hash["times"][i].trim();
+    }
   }
 
-  $('#self-disclosure').val(spreadsheet_hash["self-disclosure"]);
-  $('#solution-orientation').val(spreadsheet_hash["solution-orientation"]);
-  $('#structured').val(spreadsheet_hash["structured"]);
-  $('#active').val(spreadsheet_hash["active"]);
-  $('#therapies').val(spreadsheet_hash["therapies"]);
-  $('#mentor_score').val(spreadsheet_hash["mentor score"]);
+  $('#self-disclosure').val((spreadsheet_hash["self-disclosure"] || "0"));
+  $('#solution-orientation').val((spreadsheet_hash["solution-orientation"] || "0"));
+  $('#structured').val((spreadsheet_hash["structure"] || "0"));
+  $('#active').val((spreadsheet_hash["active"] || "0"));
+  $('#practical').val((spreadsheet_hash["active"] || "0")); //Placeholder - '#practical' is not currently in use.
+
+  $('#therapies').val((spreadsheet_hash["therapies"] || "All"));
+  $('#mentor_score').val((spreadsheet_hash["mentor score"] || "1"));
   $('#age').val(spreadsheet_hash["age"]);
-  $('#gender_preference').val(spreadsheet_hash["gender preference"]);
-  $('#ethnicity').val(spreadsheet_hash["ethnicity"]);
-  $('#ethnicity_matters').val(spreadsheet_hash["ethnicity matters?"]);
-  $('#lgbt').val(spreadsheet_hash["lgbt?"]);
-  $('#location').val(spreadsheet_hash["location"]);
-  $('#days').val(spreadsheet_hash["days"]);
-  $('#times').val(spreadsheet_hash["times"]);
-  $('#practical').val(spreadsheet_hash["practical"]);
+  $('#gender_preference').val((spreadsheet_hash["gender preference"] || "Both/Doesn't Matter"));
+  $('#ethnicity').val((spreadsheet_hash["ethnicity"] || "White"));
+  $('#ethnicity_matters').val((spreadsheet_hash["ethnicity matters?"] || "No"));
+  $('#sexual_orientation').val((spreadsheet_hash["sexual orientation"] || "N/A"));
+  $('#location').val((spreadsheet_hash["location"] || "All"));
+  $('#days').val((spreadsheet_hash["days"] || "All"));
+  $('#times').val((spreadsheet_hash["times"] || "All"));
 
   $('#sort').click();
 });

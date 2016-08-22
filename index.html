@@ -5,6 +5,7 @@
     <link href="./Images/favicon.ico" rel="icon" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="style.css">
     <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   </head>
   <body>
     <h1>Provider Matcher</h1>
@@ -12,75 +13,50 @@
     <div class="flex-container">
       <div class="flex-item">
         <h3>Toggle the inputs below to find the most appropriate providers.</h3>
-        <div class="label">Solution-Orientation:</div>
-        <select id="solution-orientation">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select><br>
+        <div class="label" id="label-solution-orientation">Solution-Orientation:</div>
+        <script type="text/javascript">
+          var optionString = "";
+          for (var i = 0; i < 101; i++) {
+            optionString += "<option value='" + (i * 0.01) + "'>" + i + "%</option>";
+          }
+          $('#label-solution-orientation').after("<select id='solution-orientation'>" + optionString + "</select><br>");
+        </script>
 
-        <div class="label">Structured:</div>
-        <select id="structured">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select><br>
+        <div class="label" id="label-structured">Structured:</div>
+        <script type="text/javascript">
+          var optionString = "";
+          for (var i = 0; i < 101; i++) {
+            optionString += "<option value='" + (i * 0.01) + "'>" + i + "%</option>";
+          }
+          $('#label-structured').after("<select id='structured'>" + optionString + "</select><br>");
+        </script>
 
-        <div class="label">Active:</div>
-        <select id="active">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select><br>
+        <div class="label" id="label-active">Active:</div>
+        <script type="text/javascript">
+          var optionString = "";
+          for (var i = 0; i < 101; i++) {
+            optionString += "<option value='" + (i * 0.01) + "'>" + i + "%</option>";
+          }
+          $('#label-active').after("<select id='active'>" + optionString + "</select><br>");
+        </script>
 
-        <div class="label">Practical:</div>
-        <select id="practical">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select><br>
+        <div class="label" id="label-practical">Practical:</div>
+        <script type="text/javascript">
+          var optionString = "";
+          for (var i = 0; i < 101; i++) {
+            optionString += "<option value='" + (i * 0.01) + "'>" + i + "%</option>";
+          }
+          $('#label-practical').after("<select id='practical'>" + optionString + "</select><br>");
+        </script>
 
-        <div class="label">Self-Disclosure:</div>
-        <select id="self-disclosure">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select><br>
+        <div class="label" id=label-self-disclosure>Self-Disclosure:</div>
+        <script type="text/javascript">
+          var optionString = "";
+          for (var i = 0; i < 101; i++) {
+            optionString += "<option value='" + (i * 0.01) + "'>" + i + "%</option>";
+          }
+          $('#label-self-disclosure').after("<select id='self-disclosure'>" + optionString + "</select><br>");
+        </script>
 
         <div class="label">Therapies (Cmd for multiple):</div>
         <select multiple style="height:100px" id="therapies">
@@ -129,8 +105,8 @@
 
         <div class="label">Gender Preference:</div>
         <select id="gender_preference">
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
+          <option value="Men">Men</option>
+          <option value="Women">Women</option>
           <option selected value="Both/Doesn't Matter">Both/Doesn't Matter</option>
         </select><br>
 
@@ -147,15 +123,19 @@
 
         <div class="label">Ethnicity matters?:</div>
         <select id="ethnicity_matters">
-          <option value="Yes">Yes</option>
-          <option selected value="No">No</option>
+          <option selected value="Not important">Not important</option>
+          <option value="Moderately important">Moderately important</option>
+          <option value="Very important">Very important</option>
         </select><br>
 
-        <div class="label">LGBT?:</div>
-        <select id="lgbt">
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-          <option selected value="N/A">N/A</option>
+        <div class="label">Sexual Orientation:</div>
+        <select id="sexual_orientation">
+          <option selected value="Straight">Straight</option>
+          <option value="Gay/lesbian">Gay/lesbian</option>
+          <option value="Bisexual">Bisexual</option>
+          <option value="Pansexual">Pansexual</option>
+          <option value="Asexual">Asexual</option>
+          <option value="Questioning/other">Questioning/other</option>
         </select><br>
 
         <div class="label">Location (Cmd for multiple):</div>
@@ -195,17 +175,17 @@
           <option value="Wednesday">Wednesday</option>
           <option value="Thursday">Thursday</option>
           <option value="Friday">Friday</option>
-          <option value="Saturday">Saturday</option>
-          <option value="Sunday">Sunday</option>
+          <option value="Saturday (limited)">Saturday (limited)</option>
+          <option value="Sunday (limited)">Sunday (limited)</option>
         </select><br>
 
         <div class="label">Times (Cmd for multiple):</div>
         <select multiple style="height:100px" id="times">
           <option value="All" selected>All</option>
-          <option value="Morning (7-11am)">Morning (7-11am)</option>
-          <option value="Midday (11am-2pm)">Midday (11am-2pm)</option>
-          <option value="Afternoon (2-5pm)">Afternoon (2-5pm)</option>
-          <option value="Evening (5-8pm)">Evening (5-8pm)</option>
+          <option value="Mornings (7am - 11am)">Mornings (7am - 11am)</option>
+          <option value="Midday (11am - 2pm)">Midday (11am - 2pm)</option>
+          <option value="Afternoon (2pm - 5pm)">Afternoon (2pm - 5pm)</option>
+          <option value="Evening (5pm - 8pm)">Evening (5pm - 8pm)</option>
         </select><br><br>
 
         <button type="button" id="sort">Find Providers</button>
@@ -247,7 +227,6 @@ Times: Midday (11am-2pm), Evening (5-8pm)"></textarea><br><br>
     <div id="root"></div>
   </body>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/1.4.2/jquery.floatThead.min.js"></script>
   <script type="text/javascript" src="jquery.leanModal.min.js"></script>
   <script src="bundle.js" charset="utf-8"></script>

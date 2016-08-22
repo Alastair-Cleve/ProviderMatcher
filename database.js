@@ -12,7 +12,7 @@ var providers = {
        "locations": ["Noe Valley"],
        "therapies": ["Humanistic","Cognitive Behavioral Therapy","Coaching"],
        "days": ["Tuesday","Wednesday"],
-       "times": ["Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
   2: { "name": "Sadie Phillips",
        "solution-orientation": 6,
@@ -27,7 +27,7 @@ var providers = {
        "locations": ["Pacific Heights"],
        "therapies": ["Cognitive Behavioral Therapy","Interpersonal Therapy","Eclecticism","Clinical Health Psychology"],
        "days": ["Monday","Wednesday"],
-       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
+       "times": ["Midday (11am - 2pm)","Afternoon (2pm - 5pm)"]},
 
   3: { "name": "Neil Howell",
        "solution-orientation": 8,
@@ -41,8 +41,8 @@ var providers = {
        "sexual_orientation": "Bisexual",
        "locations": ["Pacific Heights"],
        "therapies": ["Cognitive Behavioral Therapy","Interpersonal Therapy","Coaching"],
-       "days": ["Thursday","Saturday","Sunday"],
-       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "days": ["Thursday","Saturday (limited)","Sunday (limited)"],
+       "times": ["Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    4: {"name": "Ashley Crouch",
        "solution-orientation":7,
@@ -57,7 +57,7 @@ var providers = {
        "locations": ["Hayes Valley/Lower Haight/Duboce Triangle"],
        "therapies": ["Psychodynamic","Humanistic","Mindfulness/Meditation"],
        "days": ["Monday","Wednesday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    5:  {"name": "Emily Mills",
         "solution-orientation":4,
@@ -71,8 +71,8 @@ var providers = {
    	"sexual_orientation":"Gay/Lesbian",
    	"locations": ["Pacific Heights"],
        "therapies": ["Psychodynamic","Interpersonal Therapy","Mindfulness/Meditation"],
-       "days": ["Monday","Wednesday","Friday","Saturday"],
-       "times": ["Evening (5-8pm)"]},
+       "days": ["Monday","Wednesday","Friday","Saturday (limited)"],
+       "times": ["Evening (5pm - 8pm)"]},
 
    6:  {"name": "Rochelle Greenhagen",
        "solution-orientation":3,
@@ -87,7 +87,7 @@ var providers = {
    	"locations": ["Marina/Cow Hollow"],
        "therapies": ["Psychodynamic","Humanistic","Relational"],
        "days": ["Tuesday","Wednesday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)"]},
 
    7:     {"name": "Adam Snow",
        "solution-orientation":5,
@@ -101,8 +101,8 @@ var providers = {
    	"sexual_orientation":"Bisexual",
    	"locations": ["Hayes Valley/Lower Haight/Duboce Triangle"],
        "therapies": ["Psychodynamic","Humanistic","Interpersonal Therapy"],
-       "days": ["Monday","Thursday","Saturday"],
-       "times": ["Morning (7-11am)","Evening (5-8pm)"]},
+       "days": ["Monday","Thursday","Saturday (limited)"],
+       "times": ["Mornings (7am - 11am)","Evening (5pm - 8pm)"]},
 
    8:     {"name": "Sarah Soul",
        "solution-orientation":3,
@@ -117,7 +117,7 @@ var providers = {
    	"locations": ["Castro/Twin Peaks"],
        "therapies": ["Psychodynamic","Humanistic","Cognitive Behavioral Therapy","Mindfulness/Meditation","Coaching"],
        "days": ["Monday","Tuesday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)"]},
 
    9:     {"name": "Bradford Smallwood",
        "solution-orientation":7,
@@ -132,7 +132,7 @@ var providers = {
    	"locations": ["Marina/Cow Hollow"],
        "therapies": ["Humanistic","Cognitive Behavioral Therapy"],
        "days": ["Tuesday","Thursday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    10:    {"name": "Diane DuBois",
        "solution-orientation":8,
@@ -147,7 +147,7 @@ var providers = {
    "locations": ["Pacific Heights"],
        "therapies": ["Psychodynamic","Humanistic","Cognitive Behavioral Therapy","Interpersonal Therapy","Coaching"],
        "days": ["Tuesday","Thursday","Friday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    11:    {"name": "Beth Cassel",
        "solution-orientation":4,
@@ -162,7 +162,7 @@ var providers = {
    "locations": ["RichMondayd"],
        "therapies": ["Psychodynamic","Humanistic","Mindfulness/Meditation"],
        "days": ["Tuesday","Thursday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)"]},
 
    12:    {"name": "Holly Greenberg",
        "solution-orientation":5,
@@ -176,8 +176,8 @@ var providers = {
    "sexual_orientation":"Straight",
    "locations": ["Pacific Heights"],
        "therapies": ["Psychoanalytical","Psychodynamic","Somatic Therapy"],
-       "days": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "days": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday (limited)","Sunday (limited)"],
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    13:    {"name": "Erika Gimbel",
        "solution-orientation":6,
@@ -192,7 +192,7 @@ var providers = {
    "locations": ["Pacific Heights","East Bay/Berkeley"],
        "therapies": ["Experiential Therapy","Mindfulness/Meditation","Coaching"],
        "days": ["Monday","Tuesday","Thursday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    14:    {"name": "Andrea Crapanzano",
        "solution-orientation":4,
@@ -207,7 +207,7 @@ var providers = {
    "locations": ["Hayes Valley/Lower Haight/Duboce Triangle"],
        "therapies": ["Psychoanalytical","Psychodynamic","Interpersonal Therapy"],
        "days": ["Friday"],
-       "times": ["Afternoon (2-5pm)"]},
+       "times": ["Afternoon (2pm - 5pm)"]},
 
    15:    {"name": "Michael Milazzo",
        "solution-orientation":7,
@@ -221,8 +221,8 @@ var providers = {
    "sexual_orientation":"Gay/lesbian",
    "locations": ["Financial District","Castro/Twin Peaks"],
        "therapies": ["Cognitive Behavioral Therapy","Mindfulness/Meditation","Coaching"],
-       "days": ["Wednesday","Thursday","Saturday"],
-       "times": ["Afternoon (2-5pm)"]},
+       "days": ["Wednesday","Thursday","Saturday (limited)"],
+       "times": ["Afternoon (2pm - 5pm)"]},
 
    16:    {"name": "Warren Miller",
        "solution-orientation":7,
@@ -237,7 +237,7 @@ var providers = {
    "locations": ["Financial District"],
        "therapies": ["Psychodynamic","Humanistic","Cognitive Behavioral Therapy","Interpersonal Therapy","Experiential Therapy","Eclecticism","Mindfulness/Meditation"],
        "days": ["Friday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)"]},
 
    17:    {"name": "Aaron Hagaman",
        "solution-orientation":7,
@@ -252,7 +252,7 @@ var providers = {
    "locations": ["Hayes Valley/Lower Haight/Duboce Triangle","Castro/Twin Peaks"],
        "therapies": ["Experiential Therapy","Somatic Therapy"],
        "days": ["Tuesday","Wednesday","Thursday"],
-       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
+       "times": ["Midday (11am - 2pm)","Afternoon (2pm - 5pm)"]},
 
    18:    {"name": "Manami Yamamoto",
        "solution-orientation":5,
@@ -267,7 +267,7 @@ var providers = {
    "locations": ["East Bay/Berkeley","South Bay","Laurel Heights"],
        "therapies": ["Jungian Psychotherapy","Humanistic","Cognitive Behavioral Therapy","Mindfulness/Meditation","Coaching","Existential Therapy","Expressive Arts Therapy"],
        "days": ["Monday","Tuesday","Wednesday"],
-       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    19:    {"name": "Gabriel Thibaut de Maisieres",
        "solution-orientation":5,
@@ -282,7 +282,7 @@ var providers = {
    "locations": ["Financial District","Union Square/Mid-Market"],
        "therapies": ["Cognitive Behavioral Therapy","Interpersonal Therapy","Experiential Therapy","Coaching","Psychodrama"],
        "days": ["Wednesday","Friday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    20:    {"name": "Stacey McGuirl",
        "solution-orientation":5,
@@ -296,8 +296,8 @@ var providers = {
    "sexual_orientation":"Bisexual",
    "locations": ["Financial District","SoMa"],
        "therapies": ["Psychoanalytical","Cognitive Behavioral Therapy","Coaching"],
-       "days": ["Monday","Wednesday","Saturday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "days": ["Monday","Wednesday","Saturday (limited)"],
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    21:    {"name": "Tess Brigham",
        "solution-orientation":9,
@@ -312,7 +312,7 @@ var providers = {
    "locations": ["Financial District","East Bay/Berkeley"],
        "therapies": ["Cognitive Behavioral Therapy","Coaching"],
        "days": ["Wednesday"],
-       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    22:    {"name": "Hillary Dupuis",
        "solution-orientation":8,
@@ -327,7 +327,7 @@ var providers = {
    "locations": ["Mission/Dolores/Bernal Heights"],
        "therapies": ["Humanistic","Cognitive Behavioral Therapy","Mindfulness/Meditation"],
        "days": ["Wednesday","Thursday"],
-       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
+       "times": ["Midday (11am - 2pm)","Afternoon (2pm - 5pm)"]},
 
    23:    {"name": "Jessica Harvey",
        "solution-orientation":7,
@@ -342,7 +342,7 @@ var providers = {
    "locations": ["Financial District","Marina/Cow Hollow"],
        "therapies": ["Humanistic","Interpersonal Therapy","Eclecticism"],
        "days": ["Monday","Thursday"],
-       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
+       "times": ["Midday (11am - 2pm)","Afternoon (2pm - 5pm)"]},
 
    24:    {"name": "Alicia Stephen",
        "solution-orientation":4,
@@ -357,7 +357,7 @@ var providers = {
    "locations": ["Mission/Dolores/Bernal Heights"],
        "therapies": ["Humanistic","Cognitive Behavioral Therapy","Interpersonal Therapy","Experiential Therapy","Coaching","Drama Therapy And Arts Therapy"],
        "days": ["Tuesday","Wednesday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    25:    {"name": "Jo Anna Costa",
        "solution-orientation":7,
@@ -372,7 +372,7 @@ var providers = {
    "locations": ["Peninsula"],
        "therapies": ["Cognitive Behavioral Therapy","Eclecticism","Coaching","Solution Focused"],
        "days": ["Thursday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)"]},
 
    26:    {"name": "Barbara Lankamp-Kochis",
        "solution-orientation":9,
@@ -387,7 +387,7 @@ var providers = {
    "locations": ["Martinez"],
        "therapies": ["Cognitive Behavioral Therapy","Interpersonal Therapy","Experiential Therapy"],
        "days": ["Monday","Tuesday","Wednesday","Thursday"],
-       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    27:    {"name": "Jennifer Normoyle",
        "solution-orientation":8,
@@ -402,7 +402,7 @@ var providers = {
    "locations": ["Mission/Dolores/Bernal Heights"],
        "therapies": ["Humanistic","Cognitive Behavioral Therapy","Interpersonal Therapy"],
         "days": ["Wednesday","Thursday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    28:    {"name": "Natasha Collins",
        "solution-orientation":7,
@@ -416,8 +416,8 @@ var providers = {
    "sexual_orientation":"Straight",
    "locations": ["Financial District"],
        "therapies": ["Cognitive Behavioral Therapy"],
-       "days": ["Saturday"],
-       "times": ["Morning (7-11am)"]},
+       "days": ["Saturday (limited)"],
+       "times": ["Mornings (7am - 11am)"]},
 
    29:    {"name": "Senna Osby",
        "solution-orientation":5,
@@ -426,12 +426,12 @@ var providers = {
    "practical":10,
    "self-disclosure":0,
    "gender":"Female","birth_year":1976,
-   "ethnicity":"Black or AFridaycan American",
+   "ethnicity":"Black or African American",
    "sexual_orientation":"Straight",
    "locations": ["Lower Pacific Heights"],
        "therapies": ["Psychodynamic","Eclecticism","Person-Centered Therapy"],
-       "days": ["Tuesday","Saturday"],
-       "times": ["Morning (7-11am)","Evening (5-8pm)"]},
+       "days": ["Tuesday","Saturday (limited)"],
+       "times": ["Mornings (7am - 11am)","Evening (5pm - 8pm)"]},
 
    30:    {"name": "Lori Fink",
        "solution-orientation":6,
@@ -445,7 +445,7 @@ var providers = {
    "locations": ["Mission/Dolores/Bernal Heights"],
        "therapies": ["Psychodynamic","Cognitive Behavioral Therapy","Eclecticism","Mindfulness/Meditation","AEDP"],
         "days": ["Wednesday","Thursday"],
-       "times": ["Midday (11am-2pm)","Evening (5-8pm)"]},
+       "times": ["Midday (11am - 2pm)","Evening (5pm - 8pm)"]},
 
    31:    {"name": "Amy Swart",
        "solution-orientation":5,
@@ -460,7 +460,7 @@ var providers = {
    "locations": ["Financial District","Union Square/Mid-Market"],
        "therapies": ["Humanistic","Interpersonal Therapy","Mindfulness/Meditation"],
        "days": ["Tuesday","Thursday"],
-       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
+       "times": ["Midday (11am - 2pm)","Afternoon (2pm - 5pm)"]},
 
    32:    {"name": "Liz Michaud",
        "solution-orientation":5,
@@ -474,8 +474,8 @@ var providers = {
    "sexual_orientation":"Questioning/other",
    "locations": ["Mission/Dolores/Bernal Heights"],
        "therapies": ["Psychodynamic","Humanistic","Gestalt"],
-       "days": ["Friday","Saturday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "days": ["Friday","Saturday (limited)"],
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    33:    {"name": "Clark Hsu",
        "solution-orientation":3,
@@ -490,7 +490,7 @@ var providers = {
    "locations": ["Mission/Dolores/Bernal Heights"],
        "therapies": ["Humanistic","Mindfulness/Meditation"],
        "days": ["Wednesday"],
-       "times": ["Morning (7-11am)"]},
+       "times": ["Mornings (7am - 11am)"]},
 
    34:    {"name": "Talia Recht",
        "solution-orientation":5,
@@ -505,7 +505,7 @@ var providers = {
    "locations": ["Financial District"],
        "therapies": ["Psychodynamic","Cognitive Behavioral Therapy","Eclecticism"],
        "days": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    35:    {"name": "Zeynep Kagan",
        "solution-orientation":5,
@@ -520,7 +520,7 @@ var providers = {
    "locations": ["Hayes Valley/Lower Haight/Duboce Triangle","Castro/Twin Peaks"],
        "therapies": ["Psychodynamic","Humanistic","Interpersonal Therapy"],
        "days": ["Monday","Tuesday"],
-       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
+       "times": ["Midday (11am - 2pm)","Afternoon (2pm - 5pm)"]},
 
    36:    {"name": "Giancarlo Scherillo",
        "solution-orientation":4,
@@ -535,7 +535,7 @@ var providers = {
    "locations": ["RichMondayd"],
        "therapies": ["Psychodynamic","Mindfulness/Meditation"],
        "days": ["Tuesday","Thursday","Friday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    37:    {"name": "Emily Adams",
        "solution-orientation":5,
@@ -550,7 +550,7 @@ var providers = {
    "locations": ["Union Square/Mid-Market"],
        "therapies": ["Psychodynamic","Humanistic","Interpersonal Therapy","Mindfulness/Meditation"],
        "days": ["Monday","Tuesday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    38:    {"name": "Cosmin Gheorghe",
        "solution-orientation":10,
@@ -565,7 +565,7 @@ var providers = {
    "locations": ["Financial District"],
        "therapies": ["Cognitive Behavioral Therapy","Eclecticism","Coaching"],
        "days": ["Tuesday","Thursday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    39:    {"name": "Chip Murray",
        "solution-orientation":7,
@@ -580,7 +580,7 @@ var providers = {
    "locations": ["Union Square/Mid-Market"],
        "therapies": ["Psychodynamic","Cognitive Behavioral Therapy","Interpersonal Therapy","Experiential Therapy","Eclecticism"],
        "days": ["Tuesday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)"]},
 
    40:    {"name": "Dimitra Farmas",
        "solution-orientation":8,
@@ -595,7 +595,7 @@ var providers = {
    "locations": ["Castro/Twin Peaks"],
        "therapies": ["Cognitive Behavioral Therapy","Interpersonal Therapy","Mindfulness/Meditation"],
        "days": ["Monday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
    41:    {"name": "Elizabeth Heuser",
        "solution-orientation":4,
@@ -609,8 +609,8 @@ var providers = {
    "sexual_orientation":"Straight",
    "locations": ["Financial District"],
        "therapies": ["Humanistic","Mindfulness/Meditation"],
-       "days": ["Saturday"],
-       "times": ["Morning (7-11am)","Evening (5-8pm)"]},
+       "days": ["Saturday (limited)"],
+       "times": ["Mornings (7am - 11am)","Evening (5pm - 8pm)"]},
 
    42:    {"name": "Chia Ning (Michelle) Chang",
        "solution-orientation":7,
@@ -624,8 +624,8 @@ var providers = {
    "sexual_orientation":"Bisexual",
    "locations": ["Noe Valley"],
        "therapies": ["Psychodynamic","Experiential Therapy","Coaching","Strategic Family Therapy"],
-       "days": ["Wednesday","Thursday","Sunday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)"]},
+       "days": ["Wednesday","Thursday","Sunday (limited)"],
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)"]},
 
    43:    {"name": "Madhu Batheja",
        "solution-orientation":6,
@@ -640,7 +640,7 @@ var providers = {
    "locations": ["Pacific Heights"],
        "therapies": ["Psychodynamic","Eclecticism","Somatic Therapy"],
        "days": ["Tuesday","Wednesday","Thursday"],
-       "times": ["Afternoon (2-5pm)"]},
+       "times": ["Afternoon (2pm - 5pm)"]},
 
    44:    {"name": "Holly Micheletos",
        "solution-orientation":6,
@@ -655,7 +655,7 @@ var providers = {
    "locations": ["RichMondayd"],
        "therapies": ["Psychodynamic","Cognitive Behavioral Therapy","Interpersonal Therapy"],
        "days": ["Monday","Tuesday","Wednesday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
 45:    {"name": "Nadia Ashjaee",
        "solution-orientation":7,
@@ -665,12 +665,12 @@ var providers = {
    "self-disclosure":6,
    "gender":"Female",
    "birth_year":1980,
-   "ethnicity":"Middle Eastern or North AFridaycan",
+   "ethnicity":"Middle Eastern or North African",
    "sexual_orientation":"Straight",
    "locations": ["Union Square/Mid-Market"],
        "therapies": ["Interpersonal Therapy","Experiential Therapy"],
        "days": ["Monday","Tuesday"],
-       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
 46:    {"name": "Kip Williams",
        "solution-orientation":5,
@@ -685,7 +685,7 @@ var providers = {
    "locations": ["Civic Center"],
        "therapies": ["Humanistic","Mindfulness/Meditation","Acceptance And Commitment Therapy"],
        "days": ["Tuesday"],
-       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)"]},
+       "times": ["Midday (11am - 2pm)","Afternoon (2pm - 5pm)"]},
 
 47:    {"name": "Tracy McGillis",
        "solution-orientation":6,
@@ -700,7 +700,7 @@ var providers = {
    "locations": ["Union Square/Mid-Market"],
        "therapies": ["Humanistic","Cognitive Behavioral Therapy","Interpersonal Therapy","Eclecticism","Mindfulness/Meditation","Coaching"],
        "days": ["Wednesday","Thursday","Friday"],
-       "times": ["Morning (7-11am)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
 48:    {"name": "Lauren Korshak",
        "solution-orientation":5,
@@ -715,7 +715,7 @@ var providers = {
    "locations": ["Financial District","Hayes Valley/Lower Haight/Duboce Triangle"],
        "therapies": ["Psychodynamic","Jungian Psychotherapy","Cognitive Behavioral Therapy","Interpersonal Therapy","Experiential Therapy","Mindfulness/Meditation","Coaching"],
        "days": ["Friday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)"]},
 
 49:    {"name": "Laura Futransky",
        "solution-orientation":3,
@@ -730,7 +730,7 @@ var providers = {
    "locations": ["Union Square/Mid-Market"],
        "therapies": ["Psychodynamic","Experiential Therapy","Acceptance And Commitment Therapy"],
        "days": ["Tuesday","Wednesday","Thursday"],
-       "times": ["Morning (7-11am)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Evening (5pm - 8pm)"]},
 
 50:    {"name": "JS Very",
        "solution-orientation":5,
@@ -744,8 +744,8 @@ var providers = {
    "sexual_orientation":"Pansexual",
    "locations": ["Union Square/Mid-Market"],
        "therapies": ["Humanistic","Cognitive Behavioral Therapy","Mindfulness/Meditation"],
-       "days": ["Wednesday","Thursday","Saturday"],
-       "times": ["Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "days": ["Wednesday","Thursday","Saturday (limited)"],
+       "times": ["Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
 51:    {"name": "Doug Ronning",
        "solution-orientation":6,
@@ -760,7 +760,7 @@ var providers = {
    "locations": ["Noe Valley"],
        "therapies": ["Jungian Psychotherapy","Experiential Therapy","Mindfulness/Meditation"],
        "days": ["Monday","Tuesday"],
-       "times": ["Afternoon (2-5pm)"]},
+       "times": ["Afternoon (2pm - 5pm)"]},
 
 52:    {"name": "Nicole O'Connor",
        "solution-orientation":4,
@@ -775,7 +775,7 @@ var providers = {
    "locations": ["Noe Valley"],
        "therapies": ["Psychodynamic","Cognitive Behavioral Therapy","Interpersonal Therapy","Mindfulness/Meditation","Coaching"],
        "days": ["Tuesday","Thursday"],
-       "times": ["Midday (11am-2pm)"]},
+       "times": ["Midday (11am - 2pm)"]},
 
 53:    {"name": "Betty Michaud",
        "solution-orientation":3,
@@ -790,7 +790,7 @@ var providers = {
    "locations": ["Noe Valley"],
        "therapies": ["Humanistic","Interpersonal Therapy","Mindfulness/Meditation"],
        "days": ["Thursday"],
-       "times": ["Afternoon (2-5pm)"]},
+       "times": ["Afternoon (2pm - 5pm)"]},
 
 54:    {"name": "Travis Robinson",
        "solution-orientation":7,
@@ -805,7 +805,7 @@ var providers = {
    "locations": ["Marina/Cow Hollow"],
        "therapies": ["Humanistic","Experiential Therapy","Mindfulness/Meditation"],
        "days": ["Monday","Tuesday","Wednesday","Friday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
 55:    {"name": "Julia Lehrman",
        "solution-orientation":8,
@@ -820,7 +820,7 @@ var providers = {
    "locations": ["Financial District","Union Square/Mid-Market","SoMa"],
        "therapies": ["Cognitive Behavioral Therapy","Mindfulness/Meditation","Coaching"],
        "days": ["Wednesday","Friday"],
-       "times": ["Morning (7-11am)","Midday (11am-2pm)","Afternoon (2-5pm)","Evening (5-8pm)"]},
+       "times": ["Mornings (7am - 11am)","Midday (11am - 2pm)","Afternoon (2pm - 5pm)","Evening (5pm - 8pm)"]},
 
 };
 
